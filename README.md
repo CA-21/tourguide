@@ -1,6 +1,8 @@
 TourGuide
 =========
 
+http://tourguide.io
+
 ## License
 
 Titanium Mobile App for tour guiding on Android &amp; iOS
