@@ -1,0 +1,13 @@
+{
+	"id": "com.visitenumerique.tourmlNavigation",
+	"name": "com.visitenumerique.tourmlNavigation",
+	"description" : "List, keypad and map icons for navigation between tourml views.",
+	"author": "Gautier Michelin",
+	"version": "1.0",
+	"copyright":"Copyright 2013 Gautier Michelin",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"",
+	"platforms":"android,ios,mobileweb"
+}

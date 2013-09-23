@@ -1,0 +1,20 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+		
+		<ScrollView id="content">
+			<View id="header">
+				<Label id="code" />
+				
+				<Label id="Title" />
+			</View>
+			<View id="imageContainer">
+				<View id="image" />
+			</View>
+			<TextArea id="text" />
+
+			<TableView id="container" />
+			
+		</ScrollView>
+	</View>
+</Alloy>

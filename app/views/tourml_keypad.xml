@@ -1,0 +1,35 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+		
+		<View id="content">
+			<View id="header">
+				<Label id="title" />
+			</View>
+			
+			<View id="cv">
+				<View id="keypadDisplay">
+					<Label id="keypadDisplayText"></Label>
+				</View>
+				<View id="messageDisplay">
+					<Label id="messageDisplayText"></Label>
+				</View>
+				<View id="buttons">
+					<View id="b1" class="digitbutton"><Label class="buttonlabel">1</Label></View>
+					<View id="b2" class="digitbutton"><Label class="buttonlabel">2</Label></View>
+					<View id="b3" class="digitbutton"><Label class="buttonlabel">3</Label></View>
+					<View id="b4" class="digitbutton"><Label class="buttonlabel">4</Label></View>
+					<View id="b5" class="digitbutton"><Label class="buttonlabel">5</Label></View>
+					<View id="b6" class="digitbutton"><Label class="buttonlabel">6</Label></View>
+					<View id="b7" class="digitbutton"><Label class="buttonlabel">7</Label></View>
+					<View id="b8" class="digitbutton"><Label class="buttonlabel">8</Label></View>
+					<View id="b9" class="digitbutton"><Label class="buttonlabel">9</Label></View>
+					<View id="b0" class="digitbutton"><Label class="buttonlabel">0</Label></View>
+					<View id="bClear" class="otherbutton"><Label class="buttonlabel">Clear</Label></View>
+					<View id="bGo" class="otherbutton"><Label class="buttonlabel">Go</Label></View>
+				</View>
+			</View>
+			
+		</View>
+	</View>
+</Alloy>

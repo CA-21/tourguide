@@ -1,0 +1,21 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+		
+		<View id="content">
+			<View id="header">
+				<Label id="code" />
+				<Label id="title" />
+			</View>
+			
+			<View id="artworkWrapper">
+				<ImageView id="artwork" />
+				
+			</View>
+
+			<View id="footer">
+				<Label id="footer_label" />
+			</View>
+		</View>
+	</View>
+</Alloy>

@@ -1,0 +1,11 @@
+<Alloy>
+	<TableViewRow id="row">
+		<View id="content">
+			<Label id="code" />
+			<Label id="heading" />
+			<Label id="subHeading" />
+		</View>
+		
+		<ImageView id="arrow" image="/images/arrow.png" />
+	</TableViewRow>
+</Alloy>

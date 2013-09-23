@@ -1,0 +1,7 @@
+<Alloy>
+	<View id="Wrapper">
+		<ImageView id="navlist" />
+		<ImageView id="navkeypad" />
+		<ImageView id="navmap" />
+	</View>
+</Alloy>

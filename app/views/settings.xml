@@ -1,0 +1,22 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" image="logo.png" />
+		
+		<ScrollView id="content">
+			<TableView id="legal_table" height="90dp">
+				<TableViewRow id="terms" title="Terms of Service" hasChild="true" />
+				<TableViewRow id="privacy" title="Privacy Policy" hasChild="true" />
+			</TableView>
+			
+			<TableView id="logs_table" height="90dp">
+				<TableViewRow id="logs" title="Send Application Logs" hasChild="true" />
+				<TableViewRow id="acknowledgements" title="Acknowledgements" hasChild="true" />
+			</TableView>
+			
+			<Label id="copyright" />
+			<Label id="version" />
+			<Label text="Created with the opensource projet \nTourGuide.io" />
+			<Label text="TourGuide, 2013. idéesculture/tourguide.io contributors" />
+		</ScrollView>
+	</View>
+</Alloy>

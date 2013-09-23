@@ -1,0 +1,9 @@
+#appname:TourGuide
+#appid:io.tourguide
+#type:mobile
+#guid:5d21d346-8670-4101-939c-195e927fe088
+#version:0.1
+#publisher:Gautier Michelin
+#url:http://tourguide.io
+#image:appicon.png
+#desc:TourGuide is a framework for publishing TourML tours, created with TourML editing tools like Tap-CMS. Our objective is to provide an android-side to the Tap-iOS app.

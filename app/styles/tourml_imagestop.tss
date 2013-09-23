@@ -1,0 +1,91 @@
+"#Wrapper": {
+	backgroundColor: "#FFF"
+},
+"#content": {
+	top: "47dp"
+},
+"#artworkWrapper": {
+	top: "50dp",
+	bottom: "0dp",
+	width: Ti.UI.FILL,
+	backgroundColor: "#eebbbb",
+	borderRadius: 0
+},
+"#artwork": {
+	height: "100%",
+	preventDefaultImage: true,
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL
+},
+"#header": {
+	top:"0dp",
+	backgroundGradient: {
+		type: "linear",
+		colors: [
+			"#F8F8F8",
+			"#ECECEC"
+		],
+		startPoint: {
+			x: 0,
+			y: 0
+		},
+		endPoint: {
+			x: 0,
+			y: "100%"
+		},
+		backFillStart: true
+	},
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	layout: "vertical"
+},
+"#code": {
+	top: "10dp",
+	left: "10dp",
+	right: "10dp",
+	height: "14dp",
+	font: {
+		fontSize: "12dp",
+		fontWeight: "bold"
+	},
+	color: "#777"
+},
+"#title": {
+	left: "10dp",
+	right: "10dp",
+	bottom: "10dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "16dp",
+		fontWeight: "bold"
+	},
+	color: "#333"
+},
+"#footer": {
+	width: Ti.UI.FILL,
+	height: "40dp",
+	bottom: "0dp",
+	backgroundGradient: {
+		type: "linear",
+		colors: [
+			"#E0E0E0",
+			"#FFF"
+		],
+		startPoint: {
+			x: 0,
+			y: 0
+		},
+		endPoint: {
+			x: 0,
+			y: "100%"
+		},
+		backFillStart: true
+	}
+},
+"#footer_label": {
+	color: "#000",
+	left: "10dp",
+	font: {
+		fontSize: "11dp"
+	}
+}

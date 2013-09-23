@@ -1,0 +1,10 @@
+"#Wrapper": {
+	width: "200dp",
+	top: "20dp", // GM | adding a 20px margin for iOS7 : http://docs.appcelerator.com/titanium/latest/#!/guide/iOS_7_Migration_Guide-section-37533766_iOS7MigrationGuide-LightweightWindows
+	left: "-200dp"
+},
+"#Tabs": {
+	backgroundColor: "#2E2E2E",
+	separatorColor: "#1E1E1E",
+	separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE
+}

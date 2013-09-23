@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Appcelerator Developer Center</title>
+	<atom:link href="http://developer.appcelerator.com/blog/feed" rel="self" type="application/rss+xml" />
+	<link>http://developer.appcelerator.com/blog</link>
+	<description>Appcelerator Developer Blog</description>
+	<lastBuildDate>Tue, 23 Jul 2013 18:34:07 +0000</lastBuildDate>
+	<language>en</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3.1</generator>
+		<item>
+		<title>But I Thought Titanium Was Cross Platform!?</title>
+		<link>http://developer.appcelerator.com/blog/2013/07/but-i-thought-titanium-was-cross-platform.html</link>
+		<comments>http://developer.appcelerator.com/blog/2013/07/but-i-thought-titanium-was-cross-platform.html#comments</comments>
+		<pubDate>Tue, 23 Jul 2013 18:34:07 +0000</pubDate>
+		<dc:creator>Ricardo Alcocer</dc:creator>
+				<category><![CDATA[ @en]]></category>
+
+		<guid isPermaLink="false">http://developer.appcelerator.com/blog/?p=21431</guid>
+		<description><![CDATA[The following guest spot is from long time Titan and Titanium developer, Vui Nguyen. Vui&#8217;s post walks you through some of the common mistakes developers face when they first start planning the architecture of their app for multiple platforms. Learn from Vui on how to set your app up for success on Titanium. The views [...]]]></description>
+			<content:encoded><![CDATA[blah blah]]></content:encoded>
+			<wfw:commentRss>http://developer.appcelerator.com/blog/2013/07/but-i-thought-titanium-was-cross-platform.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Hipmob brings real-time customer support to Appcelerator</title>
+		<link>http://developer.appcelerator.com/blog/2013/07/hipmob-brings-real-time-customer-support-to-appcelerator.html</link>
+		<comments>http://developer.appcelerator.com/blog/2013/07/hipmob-brings-real-time-customer-support-to-appcelerator.html#comments</comments>
+		<pubDate>Tue, 16 Jul 2013 22:00:58 +0000</pubDate>
+		<dc:creator>Gregory DiPaolo</dc:creator>
+				<category><![CDATA[ @en]]></category>
+
+		<guid isPermaLink="false">http://developer.appcelerator.com/blog/?p=21382</guid>
+		<description><![CDATA[The following guest post is from Ayo Omojola and the team at Hipmob. Learn more about how to use their Appcelerator module (now available for iOS as well as Android) and provide live support or peer-to-peer chat for your users directly in your app. We launched Hipmob a year ago to solve our own problems. [...]]]></description>
+			<content:encoded><![CDATA[blah blah]]></content:encoded>
+			<wfw:commentRss>http://developer.appcelerator.com/blog/2013/07/hipmob-brings-real-time-customer-support-to-appcelerator.html/feed</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Speed up your Android Emulator!</title>
+		<link>http://developer.appcelerator.com/blog/2013/07/speed-up-your-android-emulator.html</link>
+		<comments>http://developer.appcelerator.com/blog/2013/07/speed-up-your-android-emulator.html#comments</comments>
+		<pubDate>Tue, 09 Jul 2013 16:19:22 +0000</pubDate>
+		<dc:creator>Ricardo Alcocer</dc:creator>
+				<category><![CDATA[ @en]]></category>
+
+		<guid isPermaLink="false">http://developer.appcelerator.com/blog/?p=21332</guid>
+		<description><![CDATA[Today&#8217;s guest blog post comes to you by the folks at JoliCode, a software development firm in France specializing in Titanium, Symfony2 and JavaScript.&#8221; Earlier this year we published an article on how to use x86 images with your Android Emulator. Today we revisit this topic with a much more streamlined process that you can [...]]]></description>
+			<content:encoded><![CDATA[blah blah]]></content:encoded>
+			<wfw:commentRss>http://developer.appcelerator.com/blog/2013/07/speed-up-your-android-emulator.html/feed</wfw:commentRss>
+		<slash:comments>6</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,107 @@
+"#Wrapper": {
+	backgroundColor: "#FFF"
+},
+"#content": {
+	top: "50dp"
+},
+"#header": {
+	top:"0dp",
+	backgroundGradient: {
+		type: "linear",
+		colors: [
+			"#F8F8F8",
+			"#ECECEC"
+		],
+		startPoint: {
+			x: 0,
+			y: 0
+		},
+		endPoint: {
+			x: 0,
+			y: "100%"
+		},
+		backFillStart: true
+	},
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	layout: "vertical"
+},
+"#title": {
+	left: "10dp",
+	right: "10dp",
+	bottom: "10dp",
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: "16dp",
+		fontWeight: "bold"
+	},
+	color: "#333"
+},
+"#cv": {
+	width:Ti.UI.FILL,
+	left:"0dp",
+	top:"10dp",
+	height:Ti.UI.FILL
+},
+"#keypadDisplay": {
+	left:"10dp",width:"300dp",borderRadius:"5dp",backgroundColor:'#fff',borderColor:'#ccc',top:"35dp",height:"60dp"
+},
+"#keypadDisplayText": {
+	width:"280dp",left:"10dp",height:"40dp",top:"15dp",font:{fontSize:"35dp"},textAlign:'right'
+},
+"#messageDisplay": {
+	top:"13dp",left:"10dp",width:"300dp",height:"20dp"
+},
+"#messageDisplayText": {
+	font:{fontSize:"14dp"},color:"red"
+},
+"#b1": {
+	left:"10dp",top:"130dp"
+},
+"#b2": {
+	left:"85dp",top:"130dp"
+},
+"#b3": {
+	left:"160dp",top:"130dp"
+},
+"#b4": {
+	left:"10dp",top:"195dp"
+},
+"#b5": {
+	left:"85dp",top:"195dp"
+},
+"#b6": {
+	left:"160dp",top:"195dp"
+},
+"#b7": {
+	left:"10dp",top:"260dp"
+},
+"#b8": {
+	left:"85dp",top:"260dp"
+},
+"#b9": {
+	left:"160dp",top:"260dp"
+},
+"#b0": {
+	height:"60dp",left:"160dp",top:"325dp"
+},
+"#bClear": {
+	backgroundGradient:{type:'linear',colors:['#ccc','#999']},left:"235dp",top:"260dp"
+},
+"#bGo": {
+	backgroundGradient:{type:'linear',colors:['#000099','#111133']},left:"235dp",top:"325dp"
+},
+".digitbutton": {
+	borderRadius:"5dp",border:'#ccc',font:{fontWeight:'bold'},
+	width:"70dp",
+	height:"60dp",
+	backgroundGradient:{type:'linear',colors:['#eee','#ccc']}
+},
+".otherbutton": {
+	borderRadius:"5dp",border:'#ccc',font:{fontWeight:'bold'},
+	width:"70dp",
+	height:"60dp"
+},
+".buttonlabel": {
+	color:"#555"
+}
