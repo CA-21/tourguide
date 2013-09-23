@@ -38,4 +38,4 @@ The format TourGuide uses for tour publishing is TourML, documented & released a
 
 TourGuide is a private initiative, lead by idéesculture, a small french company, involved in opensource project & services for museums & touring sites.
 We provide services mostly in France & french-speaking, with CollectiveAccess (http://www.collectiveaccess.org) among other opensource cultural tools.
-If you've got a project involving TourGuide and need skills or consulting, don't hesitate to contact us at contact@tourguide.io
+If you've got a project involving TourGuide and need technical skills, customizations or consulting, don't hesitate to contact us at contact@tourguide.io
