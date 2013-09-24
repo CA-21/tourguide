@@ -19,5 +19,5 @@
 	width: "100%"
 },
 "#ContentWrapper": {
-	top: "20dp"
+	top: "0dp"
 }

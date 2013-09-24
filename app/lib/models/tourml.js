@@ -65,7 +65,7 @@ function Model() {
 	};
 
 	this.handleData = function(_data, _url, _callback) {
-	
+
 		APP.log("debug", "TOURML.handleData");
 		APP.log("debug", "TOURML.handleData.stop");
 
@@ -74,7 +74,7 @@ function Model() {
 		var count = data.fieldByName("count_id");
 		data.close();
 
-		if (count == 0 ) { 
+		if(count == 0) {
 			var xml = Ti.XML.parseString(UTIL.xmlNormalize(_data));
 			var nodes = xml.documentElement.getElementsByTagName("tourml:Stop");
 

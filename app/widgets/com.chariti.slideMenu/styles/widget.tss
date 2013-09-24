@@ -1,6 +1,6 @@
 "#Wrapper": {
 	width: "200dp",
-	top: "20dp", // GM | adding a 20px margin for iOS7 : http://docs.appcelerator.com/titanium/latest/#!/guide/iOS_7_Migration_Guide-section-37533766_iOS7MigrationGuide-LightweightWindows
+	top: "0dp",
 	left: "-200dp"
 },
 "#Tabs": {
