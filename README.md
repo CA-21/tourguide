@@ -1,11 +1,13 @@
 TourGuide
 =========
 
+http://tourguide.io
+
 ## License
 
 Titanium Mobile App for tour guiding on Android &amp; iOS
 
-TourGuide is released under GPLv3 license and contains parts that may are released under different licenses.
+TourGuide is released under GPLv3 license and contains parts that may have been released under different licenses.
 You can check GPLv3 license in the LICENSE file at root directory. 
 License for libraries and source code parts will be found in the relevant code directory.
 
@@ -29,3 +31,13 @@ You would then have to configure TourGuide : app/lib/data/app.json
 ## Tour Samples
 
 Contents in app/assets/tourml like Eglise.bundle (and its subdirectories) or Village.bundle contains copyrighted materials. They are presented here just as ullustrations and to allow fully working compilation tests.
+
+## TourML bundles & TAP apps
+
+The format TourGuide uses for tour publishing is TourML, documented & released at http://tapintomuseums.org/
+
+## Funding
+
+TourGuide is a private initiative, lead by idéesculture, a small french company, involved in opensource project & services for museums & touring sites.
+We provide services mostly in France & french-speaking, with CollectiveAccess (http://www.collectiveaccess.org) among other opensource cultural tools.
+If you've got a project involving TourGuide and need technical skills, customizations or consulting, don't hesitate to contact us at contact@tourguide.io
