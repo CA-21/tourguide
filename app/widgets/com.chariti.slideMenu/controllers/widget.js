@@ -68,7 +68,7 @@ $.createSettings = function() {
 	});
 	
 	var icon = Ti.UI.createImageView({
-		image: WPATH("images/settings.png"),
+		image: WPATH("/images/settings.png"),
 		width: "28dp",
 		height: "28dp",
 		top: "9dp",

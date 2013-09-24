@@ -77,21 +77,21 @@ $.showRight = function(_params) {
 
 $.showMenu = function() {
 	$.showLeft({
-		image: WPATH("images/menu.png"),
+		image: WPATH("/images/menu.png"),
 		callback: APP.toggleMenu
 	});
 };
 
 $.showSettings = function() {
 	$.showRight({
-		image: WPATH("images/settings.png"),
+		image: WPATH("/images/settings.png"),
 		callback: APP.openSettings
 	});
 };
 
 $.showAction = function(_params) {
 	$.showRight({
-		image: WPATH("images/action.png"),
+		image: WPATH("/images/action.png"),
 		callback: _params.callback
 	});
 };

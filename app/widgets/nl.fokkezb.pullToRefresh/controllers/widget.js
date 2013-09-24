@@ -19,7 +19,7 @@ exports.init = function(_params) {
 		msgUpdated: "Last Updated: %s %s",
 		backgroundColor: "#e2e7ed",
 		fontColor: "#576c89",
-		image: WPATH("images/arrow.png"),
+		image: WPATH("/images/arrow.png"),
 		indicator: "PLAIN"
 	});
 

@@ -84,7 +84,7 @@ $.init = function(_params) {
 		tab.add(label);
 		
 		if($.excess && i >= ($.excessLength - 1)) {
-			tab.backgroundImage = WPATH("images/overlay.png");
+			tab.backgroundImage = WPATH("/images/overlay.png");
 			tab.width	= ($.width + 1) + "dp";
 			label.left	= "6dp";
 			
@@ -93,7 +93,7 @@ $.init = function(_params) {
 				height: "59dp",
 				top: "1dp",
 				left: "0dp",
-				image: WPATH("images/border.png"),
+				image: WPATH("/images/border.png"),
 				preventDefaultImage: true
 			});
 			
@@ -109,7 +109,7 @@ $.init = function(_params) {
 					height: "59dp",
 					top: "1dp",
 					right: "0dp",
-					image: WPATH("images/border.png"),
+					image: WPATH("/images/border.png"),
 					preventDefaultImage: true
 				});
 				
