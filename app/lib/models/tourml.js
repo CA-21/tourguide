@@ -10,7 +10,7 @@ function Model() {
 		APP.log("debug", "TOURML.init(" + _id + ")");
 
 		TID = _id;
-		// pour l'instant on force la langue sur le français, en attendant d'envoyer ce qu'il faut pour l'instanciation
+		// for now, language is forced on french, waiting to have a good example of what is needed for instanciation
 		LANG = "fr";
 
 		var db = Ti.Database.open("ChariTi");
@@ -65,63 +65,72 @@ function Model() {
 	};
 
 	this.handleData = function(_data, _url, _callback) {
+	
 		APP.log("debug", "TOURML.handleData");
-
 		APP.log("debug", "TOURML.handleData.stop");
-		var xml = Ti.XML.parseString(UTIL.xmlNormalize(_data));
-		var nodes = xml.documentElement.getElementsByTagName("tourml:Stop");
 
-		if(nodes.length > 0) {
-			var db = Ti.Database.open("ChariTi");
+		var db = Ti.Database.open("ChariTi");
+		var data = db.execute("SELECT COUNT(id) as count_id FROM tourml_" + TID + "_stop;");
+		var count = data.fieldByName("count_id");
+		data.close();
 
-			db.execute("DELETE FROM tourml_" + TID + "_stop;");
-			db.execute("DELETE FROM tourml_" + TID + "_stop_property;");
-			db.execute("DELETE FROM tourml_" + TID + "_stop_assetref;");
-			db.execute("BEGIN TRANSACTION;");
+		if (count == 0 ) { 
+			var xml = Ti.XML.parseString(UTIL.xmlNormalize(_data));
+			var nodes = xml.documentElement.getElementsByTagName("tourml:Stop");
 
-			// Traitement des infos principales au sein du tourml:Stop
-			for(var i = 0, x = nodes.length; i < x; i++) {
-				var title = UTIL.cleanEscapeString(nodes.item(i).getElementsByTagName("tourml:Title").item(0).text);
-				var descriptionNode = nodes.item(i).getElementsByTagName("tourml:Description");
-				if(descriptionNode.length > 0) {
-					description = UTIL.cleanEscapeString(descriptionNode.item(0).text);
-				} else {
-					description = UTIL.cleanEscapeString("");
-				}
+			if(nodes.length > 0) {
+				var db = Ti.Database.open("ChariTi");
 
-				var stop_id = UTIL.cleanEscapeString(nodes.item(i).getAttribute("tourml:id"));
-				var view = UTIL.cleanEscapeString(nodes.item(i).getAttribute("tourml:view"));
+				db.execute("DELETE FROM tourml_" + TID + "_stop;");
+				db.execute("DELETE FROM tourml_" + TID + "_stop_property;");
+				db.execute("DELETE FROM tourml_" + TID + "_stop_assetref;");
+				db.execute("BEGIN TRANSACTION;");
 
-				db.execute("INSERT INTO tourml_" + TID + "_stop (id, title, description, stop_id, view) VALUES (NULL, " + title + "," + description + ", " + stop_id + ", " + view + ");");
+				// Main informations treatment inside the tourml:Stop
+				for(var i = 0, x = nodes.length; i < x; i++) {
+					var title = UTIL.cleanEscapeString(nodes.item(i).getElementsByTagName("tourml:Title").item(0).text);
+					var descriptionNode = nodes.item(i).getElementsByTagName("tourml:Description");
+					if(descriptionNode.length > 0) {
+						description = UTIL.cleanEscapeString(descriptionNode.item(0).text);
+					} else {
+						description = UTIL.cleanEscapeString("");
+					}
 
-				// Traitement des tourml:Property au sein du tourml:Stop
-				var stop_properties = nodes.item(i).getElementsByTagName("tourml:Property");
+					var stop_id = UTIL.cleanEscapeString(nodes.item(i).getAttribute("tourml:id"));
+					var view = UTIL.cleanEscapeString(nodes.item(i).getAttribute("tourml:view"));
 
-				if(stop_properties.length > 0) {
-					for(var j = 0, y = stop_properties.length; j < y; j++) {
-						var prop_name = UTIL.cleanEscapeString(stop_properties.item(j).getAttribute("tourml:name"));
-						var prop_value = UTIL.cleanEscapeString(stop_properties.item(j).textContent);
+					db.execute("INSERT INTO tourml_" + TID + "_stop (id, title, description, stop_id, view) VALUES (NULL, " + title + "," + description + ", " + stop_id + ", " + view + ");");
 
-						db.execute("INSERT INTO tourml_" + TID + "_stop_property (id, stop_id, prop_name, prop_value) VALUES (NULL, " + stop_id + "," + prop_name + ", " + prop_value + ");");
+					// Treating tourml:Property inside tourml:Stop
+					var stop_properties = nodes.item(i).getElementsByTagName("tourml:Property");
+
+					if(stop_properties.length > 0) {
+						for(var j = 0, y = stop_properties.length; j < y; j++) {
+							var prop_name = UTIL.cleanEscapeString(stop_properties.item(j).getAttribute("tourml:name"));
+							var prop_value = UTIL.cleanEscapeString(stop_properties.item(j).textContent);
+
+							db.execute("INSERT INTO tourml_" + TID + "_stop_property (id, stop_id, prop_name, prop_value) VALUES (NULL, " + stop_id + "," + prop_name + ", " + prop_value + ");");
+						}
+					}
+
+					// Treating tourml:AssetRef inside tourml:Stop
+					var stop_assetrefs = nodes.item(i).getElementsByTagName("tourml:AssetRef");
+
+					if(stop_assetrefs.length > 0) {
+						for(var j = 0, y = stop_assetrefs.length; j < y; j++) {
+							var asset_id = UTIL.cleanEscapeString(stop_assetrefs.item(j).getAttribute("tourml:id"));
+							var asset_usage = UTIL.cleanEscapeString(stop_assetrefs.item(j).getAttribute("tourml:usage"));
+
+							db.execute("INSERT INTO tourml_" + TID + "_stop_assetref (id, stop_id, asset_id, asset_usage) VALUES (NULL, " + stop_id + "," + asset_id + ", " + asset_usage + ");");
+						}
 					}
 				}
 
-				// Traitement des tourml:AssetRef au sein du tourml:Stop
-				var stop_assetrefs = nodes.item(i).getElementsByTagName("tourml:AssetRef");
-
-				if(stop_assetrefs.length > 0) {
-					for(var j = 0, y = stop_assetrefs.length; j < y; j++) {
-						var asset_id = UTIL.cleanEscapeString(stop_assetrefs.item(j).getAttribute("tourml:id"));
-						var asset_usage = UTIL.cleanEscapeString(stop_assetrefs.item(j).getAttribute("tourml:usage"));
-
-						db.execute("INSERT INTO tourml_" + TID + "_stop_assetref (id, stop_id, asset_id, asset_usage) VALUES (NULL, " + stop_id + "," + asset_id + ", " + asset_usage + ");");
-					}
-				}
+				db.execute("INSERT OR REPLACE INTO updates (url, time) VALUES(" + UTIL.escapeString(_url) + ", " + new Date().getTime() + ");");
+				db.execute("END TRANSACTION;");
+				db.close();
 			}
 
-			db.execute("INSERT OR REPLACE INTO updates (url, time) VALUES(" + UTIL.escapeString(_url) + ", " + new Date().getTime() + ");");
-			db.execute("END TRANSACTION;");
-			db.close();
 		}
 
 		var asset_nodes = xml.documentElement.getElementsByTagName("tourml:Asset");
@@ -139,7 +148,7 @@ function Model() {
 
 				db.execute("INSERT INTO tourml_" + TID + "_asset (id, asset_id, type) VALUES (NULL, " + asset_id + "," + type + ");");
 
-				// Traitement des tourml:Source au sein du tourml:Asset
+				// Treating tourml:Source inside tourml:Asset
 				var asset_sources = asset_nodes.item(i).getElementsByTagName("tourml:Source");
 
 				if(asset_sources.length > 0) {
