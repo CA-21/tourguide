@@ -78,7 +78,7 @@ $.createSettings = function() {
 	});
 	
 	var label = Ti.UI.createLabel({
-		text: "Préférences",
+		text: L("settings"),
 		top: "0dp",
 		left: "47dp",
 		right: "7dp",
