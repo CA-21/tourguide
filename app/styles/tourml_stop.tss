@@ -52,10 +52,7 @@
 "#imageContainer": {
 	backgroundColor: "#775555",
 	width: "100%",
-	height: "20%",
-	borderRadius: 0
-}
-"#image": {
+	height: "20%"
 },
 "#text": {
 	top: "15dp",
