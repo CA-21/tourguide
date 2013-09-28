@@ -32,7 +32,7 @@
 			"heading": "Visite mobile de Folleville",
 			"text": "Bienvenue dans cette application mobile de visite du site de Folleville, dans la Somme. Aux confluences entre art gothique et renaissance, moyen-âge et époque moderne, découvrez l'église, les ruines du château et l'histoire du village qui les entourent.",
 			"type": "text",
-			"background": "images/text-background.jpg",
+			"background": "/images/text-background.jpg",
 			"textcolor": "#ffffff",
 			"image": "home"
 		},
