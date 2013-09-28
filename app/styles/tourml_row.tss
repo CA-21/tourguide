@@ -25,7 +25,7 @@
 	left: "0dp"
 },
 "#code": {
-	left: "10dp",
+	left: "30dp",
 	right: "47dp",
 	top: "10dp",
 	height: "14dp",
@@ -36,7 +36,7 @@
 	color: "#777"
 },
 "#heading": {
-	left: "10dp",
+	left: "30dp",
 	right: "47dp",
 	height: Ti.UI.SIZE,
 	font: {
@@ -46,7 +46,7 @@
 	color: "#333"
 },
 "#subHeading": {
-	left: "10dp",
+	left: "30dp",
 	right: "47dp",
 	height: "14dp",
 	bottom: "10dp",
@@ -60,4 +60,9 @@
 	width: "27dp",
 	height: "27dp",
 	right: "10dp"
+},
+"#type_icon": {
+	width: "27dp",
+	height: "27dp",
+	left: "10dp"
 }
