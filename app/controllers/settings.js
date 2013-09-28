@@ -3,6 +3,11 @@ var APP = require("core");
 $.init = function() {
 	APP.log("debug", "settings.init");
 
+	$.terms.title = L("terms_of_service");
+	$.privacy.title = L("privacy_policy");
+	$.logs.title = L("send_logs");
+	$.acknowledgements.title = L("acknowledgements");
+
 	if(!APP.LEGAL.TOS && !APP.LEGAL.PRIVACY) {
 		$.content.remove($.legal_table);
 	} else if(!APP.LEGAL.TOS || !APP.LEGAL.PRIVACY) {
@@ -42,7 +47,7 @@ $.terms.addEventListener("click", function(_event) {
 	APP.log("debug", "settings @terms");
 
 	APP.addChild("settings_legal", {
-		title: "Terms of Service",
+		title: L("terms_of_service"),
 		url: APP.LEGAL.TOS
 	}, true);
 });
@@ -51,7 +56,7 @@ $.privacy.addEventListener("click", function(_event) {
 	APP.log("debug", "settings @privacy");
 
 	APP.addChild("settings_legal", {
-		title: "Privacy Policy",
+		title: L("privacy_policy"),
 		url: APP.LEGAL.PRIVACY
 	}, true);
 });
