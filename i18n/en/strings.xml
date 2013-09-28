@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="settings">Settings</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="send_logs">Send application logs</string>
+    <string name="acknowledgements">Acknowledgements</string>    
+    <string name="format_test">Your name is %s</string>
+    <string name="ordered">Hi %1$s, my name is %2$s</string>
+</resources>
