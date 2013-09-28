@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>io.tourguide</id>
+    <id>io.tourguide.test</id>
     <name>TourGuide</name>
     <version>0.1</version>
     <publisher>Gautier Michelin</publisher>
