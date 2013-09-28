@@ -1,5 +1,7 @@
 <Alloy>
 	<TableViewRow id="row">
+		<ImageView id="type_icon"/>
+		
 		<View id="content">
 			<Label id="code" />
 			<Label id="heading" />
