@@ -20,7 +20,6 @@ function Model() {
 		db.execute("CREATE TABLE IF NOT EXISTS tourml_" + TID + "_stop_assetref (id INTEGER PRIMARY KEY AUTOINCREMENT, stop_id TEXT, asset_id TEXT, asset_usage TEXT);");
 
 		db.execute("CREATE TABLE IF NOT EXISTS tourml_" + TID + "_asset (id INTEGER PRIMARY KEY AUTOINCREMENT, asset_id TEXT, type TEXT);");
-		db.execute("CREATE TABLE IF NOT EXISTS tourml_" + TID + "_asset_property (id INTEGER PRIMARY KEY AUTOINCREMENT, asset_id TEXT, asset_name TEXT, asset_value TEXT);");
 
 		db.execute("CREATE TABLE IF NOT EXISTS tourml_" + TID + "_asset_source (id INTEGER PRIMARY KEY AUTOINCREMENT, asset_id TEXT, rights_copyright TEXT, rights_creditline TEXT, rights_expiration TEXT, rights_uri TEXT, uri TEXT, lang TEXT, format TEXT, lastModified TEXT, part TEXT );");
 		db.execute("CREATE TABLE IF NOT EXISTS tourml_" + TID + "_asset_source_property (id INTEGER PRIMARY KEY AUTOINCREMENT, asset_source_id TEXT, prop_name TEXT, prop_value TEXT);");
@@ -139,7 +138,8 @@ function Model() {
 			var db = Ti.Database.open("ChariTi");
 
 			db.execute("DELETE FROM tourml_" + TID + "_asset;");
-			db.execute("DELETE FROM tourml_" + TID + "_asset_property;");
+			db.execute("DELETE FROM tourml_" + TID + "_asset_source;");
+			db.execute("DELETE FROM tourml_" + TID + "_asset_source_property;");
 			db.execute("BEGIN TRANSACTION;");
 
 			for(var i = 0, x = asset_nodes.length; i < x; i++) {
@@ -171,17 +171,18 @@ function Model() {
 
 						db.execute("INSERT INTO tourml_" + TID + "_asset_source (id, asset_id, rights_copyright, rights_creditline, rights_expiration, rights_uri, uri, lang, format, lastModified, part) " + "VALUES (NULL," + asset_id + ", " + rights_copyright + "," + rights_creditline + "," + rights_expiration + ", " + rights_uri + ", " + uri + ", " + lang + ", " + format + ", " + lastModified + ", " + part + ");");
 
+						var lastId = db.lastInsertRowId;
+
 						// Traitement des tourml:Property au sein du tourml:Asset>tourml:Source
 						var asset_source_properties = asset_sources.item(j).getElementsByTagName("tourml:Property");
 
 						if(asset_source_properties.length > 0) {
 							for(var k = 0, z = asset_source_properties.length; k < z; k++) {
 								//id, asset_source_id, prop_name, prop_value
-								var asset_source_id = UTIL.cleanEscapeString(j + 1);
 								var prop_name = UTIL.cleanEscapeString(asset_source_properties.item(k).getAttribute("tourml:name"));
 								var prop_value = UTIL.cleanEscapeString(asset_source_properties.item(k).textContent);
 
-								db.execute("INSERT INTO tourml_" + TID + "_asset_source_property (id, asset_source_id, prop_name, prop_value) VALUES (NULL, " + asset_source_id + "," + prop_name + ", " + prop_value + ");");
+								db.execute("INSERT INTO tourml_" + TID + "_asset_source_property (id, asset_source_id, prop_name, prop_value) VALUES (NULL, " + lastId + "," + prop_name + ", " + prop_value + ");");
 							}
 						}
 
@@ -487,6 +488,7 @@ function Model() {
 		var db = Ti.Database.open("ChariTi");
 
 		var subdata_request = "select ts2.id, ts2.title, ts2.stop_id, ts2.view as tourmltype from tourml_" + TID + "_connection left join tourml_" + TID + "_stop as ts1 on src_stop_id=ts1.stop_id left join tourml_" + TID + "_stop as ts2 on dest_stop_id=ts2.stop_id where ts1.id=" + UTIL.cleanEscapeString(_id) + " order by priority asc;";
+
 		APP.log("debug", "TOURML.getTourml.subdata_request | " + subdata_request);
 
 		var subdata = db.execute(subdata_request);
@@ -509,7 +511,8 @@ function Model() {
 
 		subdata.close();
 
-		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri " + "FROM tourml_" + TID + "_stop AS ts " + "LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id " + "LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id " + "LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"audio\/mpeg\" " + "WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
+		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"audio\/mpeg\" LEFT JOIN tourml_1_asset_source_property AS tasp ON tasp.asset_source_id=tas.id WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
+
 		APP.log("debug", "TOURML.getTourml.data_request | " + data_request);
 
 		var data = db.execute(data_request);
@@ -526,11 +529,13 @@ function Model() {
 				code: data.fieldByName("prop_value"),
 				image: null,
 				audio: null,
+				duration: null,
 				subdata: subdata_temp
 			};
 
 			if(data.fieldByName("uri")) {
 				temp.audio = data.fieldByName("uri");
+				temp.duration = data.fieldByName("duration");
 			}
 
 			data.next();
