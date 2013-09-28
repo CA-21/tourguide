@@ -8,3 +8,6 @@ $.subHeading.color = APP.Settings.colors.primary || "#000";
 $.subHeading.text = CONFIG.subHeading || "";
 $.code.text = CONFIG.code || "";
 $.row.tourmltype = CONFIG.tourmltype || "";
+if($.row.tourmltype == "audio_stop") {
+	$.type_icon.image = "/icons/tourml_audio.png";
+}
