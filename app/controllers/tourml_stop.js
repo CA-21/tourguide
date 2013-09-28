@@ -69,23 +69,12 @@ $.handleData = function(_data) {
 		Ti.API.info(Ti.Platform.displayCaps.platformHeight);
 		Ti.API.info(Ti.Platform.displayCaps.density);
 		Ti.API.info(Ti.Platform.displayCaps.logicalDensityFactor);
-		/*
+
 		if(Ti.Platform.osname === 'android') {
 			image_width = image_width * Ti.Platform.displayCaps.logicalDensityFactor;
 		}
-*/
-		var image_height = image_width * 120 / 320;
 
-		var image_view = Ti.UI.createImageView({
-			top: 0,
-			left: 0,
-			image: "/" + image_file,
-			//width: image_width,
-			height: image_height,
-			preventDefaultImage: true
-		});
-
-		$.image.add(image_view);
+		$.imageContainer.backgroundImage = "/" + image_file;
 	} else {
 		$.content.remove($.image)
 	}
