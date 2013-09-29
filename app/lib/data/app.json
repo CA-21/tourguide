@@ -51,8 +51,8 @@
 			"cache": 120
 		},
 		{
-			"title": "Visiter le château",
-			"feed": "Eglise.bundle",
+			"title": "Casa Brasil videos",
+			"feed": "videos.bundle",
 			"type": "tourml",
 			"image": "news3",
 			"cache": 120

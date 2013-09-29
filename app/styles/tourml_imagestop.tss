@@ -13,7 +13,6 @@
 },
 "#artwork": {
 	height: "100%",
-	preventDefaultImage: true,
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL
 },

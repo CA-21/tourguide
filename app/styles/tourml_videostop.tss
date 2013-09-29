@@ -49,10 +49,11 @@
 	},
 	color: "#333"
 },
-"#image": {
+"#videoPlayer": {
 	top: "15dp",
 	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE
+	height: "300dp",
+	backgroundColor: "black"
 },
 "#text": {
 	top: "15dp",

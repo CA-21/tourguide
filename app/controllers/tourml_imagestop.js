@@ -48,7 +48,8 @@ $.handleData = function(_data) {
 	if(!image_file) {
 		image_file = "/images/fond-no-image.png";
 	}
-	$.artwork.image = image_file;
+	var imageURL = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, image_file).nativePath;
+	$.artwork.html = '<html><body><img src="' + imageURL + '" /></body></html>';
 
 	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
@@ -95,10 +96,40 @@ $.handleNavigation = function(_id) {
 	$.NavigationBar.addNavigation(navigation);
 };
 
-$.artwork.addEventListener("pinch", function(_event) {
-	var t = Ti.UI.create2DMatrix().scale(_event.scale);
-	$.artwork.transform = t;
-});
-
 // Kick off the init
+
 $.init();
+
+/*
+if(OS_ANDROID) {
+	var win = Ti.UI.createWindow({
+		backgroundColor: '#000'
+	});
+
+	var titouchgallery = require('com.gbaldera.titouchgallery');
+
+	var proxy = titouchgallery.createTouchGallery({
+		images: [
+					"http://cs407831.userapi.com/v407831207/18f6/jBaVZFDhXRA.jpg",
+					"http://cs407831.userapi.com/v407831207/1906/oxoP6URjFtA.jpg",
+					"http://cs407831.userapi.com/v407831207/190e/2Sz9A774hUc.jpg",
+					"http://cs407831.userapi.com/v407831207/1916/Ua52RjnKqjk.jpg",
+					"http://cs407831.userapi.com/v407831207/191e/QEQE83Ok0lQ.jpg"
+				]
+	});
+	proxy.addEventListener("scroll", function(e) {
+		Ti.API.debug("Scroll event fired: " + JSON.stringify(e));
+	});
+	proxy.addEventListener("singletap", function(e) {
+		alert("Page: " + e.currentPage);
+		Ti.API.debug("SingleTap event fired: " + JSON.stringify(e));
+	});
+	proxy.addEventListener("longpress", function(e) {
+		alert("Page: " + e.currentPage);
+		Ti.API.debug("LongPress event fired: " + JSON.stringify(e));
+	});
+
+	win.add(proxy);
+	win.open();
+}
+*/

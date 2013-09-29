@@ -511,7 +511,7 @@ function Model() {
 
 		subdata.close();
 
-		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"audio\/mpeg\" LEFT JOIN tourml_1_asset_source_property AS tasp ON tasp.asset_source_id=tas.id WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
+		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"audio\/mpeg\" LEFT JOIN tourml_" + TID + "_asset_source_property AS tasp ON tasp.asset_source_id=tas.id WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
 
 		APP.log("debug", "TOURML.getTourml.data_request | " + data_request);
 
@@ -542,6 +542,77 @@ function Model() {
 		}
 
 		APP.log("debug", "TOURML.getTourml.temp | " + JSON.stringify(temp));
+
+		data.close();
+		db.close();
+
+		return temp;
+	};
+
+	/*
+	 * Fetch content function for video stop
+	 */
+
+	this.getVideoTourml = function(_id) {
+		APP.log("debug", "TOURML.getVideoTourml | " + _id);
+
+		var db = Ti.Database.open("ChariTi");
+
+		var subdata_request = "select ts2.id, ts2.title, ts2.stop_id, ts2.view as tourmltype from tourml_" + TID + "_connection left join tourml_" + TID + "_stop as ts1 on src_stop_id=ts1.stop_id left join tourml_" + TID + "_stop as ts2 on dest_stop_id=ts2.stop_id where ts1.id=" + UTIL.cleanEscapeString(_id) + " order by priority asc;";
+
+		APP.log("debug", "TOURML.getVideoTourml.subdata_request | " + subdata_request);
+
+		var subdata = db.execute(subdata_request);
+		var subdata_temp = [];
+
+		var i = 0;
+		while(subdata.isValidRow()) {
+			subdata_temp[i] = {
+				id: subdata.fieldByName("id"),
+				title: subdata.fieldByName("title"),
+				stop_id: "",
+				description: "",
+				tourmltype: subdata.fieldByName("tourmltype"),
+				code: ""
+			}
+
+			subdata.next();
+			i++;
+		}
+
+		subdata.close();
+
+		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id AND tsa.asset_usage=\"video\" LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"video\/mp4\" LEFT JOIN tourml_" + TID + "_asset_source_property AS tasp ON tasp.asset_source_id=tas.id AND tasp.prop_name LIKE \"duration\" WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
+
+		APP.log("debug", "TOURML.getVideoTourml.data_request | " + data_request);
+
+		var data = db.execute(data_request);
+
+		var temp;
+
+		while(data.isValidRow()) {
+			temp = {
+				id: data.fieldByName("id"),
+				title: data.fieldByName("title"),
+				stop_id: data.fieldByName("stop_id"),
+				description: data.fieldByName("description"),
+				tourmltype: data.fieldByName("tourmltype"),
+				code: data.fieldByName("prop_value"),
+				image: null,
+				audio: null,
+				duration: null,
+				subdata: subdata_temp
+			};
+
+			if(data.fieldByName("uri")) {
+				temp.video = data.fieldByName("uri");
+				temp.duration = data.fieldByName("duration");
+			}
+
+			data.next();
+		}
+
+		APP.log("debug", "TOURML.getVideoTourml.temp | " + JSON.stringify(temp));
 
 		data.close();
 		db.close();

@@ -49,7 +49,6 @@ $.handleData = function(_data) {
 			var row = Alloy.createController("tourml_row", {
 				id: subdata[i].id,
 				heading: subdata[i].title,
-				subHeading: subdata[i].tourmltype,
 				tourmltype: subdata[i].tourmltype
 			}).getView();
 

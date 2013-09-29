@@ -106,13 +106,18 @@ $.container.addEventListener("click", function(_event) {
 		}
 	}
 
+	APP.log("debug", "_event.row.tourmltype " + JSON.stringify(_event.row.tourmltype));
+
 	// Define which controller is called a click
-	switch(_event.row.view) {
+	switch(_event.row.tourmltype) {
 		case "audio_stop":
 			var controller = "tourml_audiostop";
 			break;
 		case "image_stop":
 			var controller = "tourml_imagestop";
+			break;
+		case "video_stop":
+			var controller = "tourml_videostop";
 			break;
 		default:
 			var controller = "tourml_stop";

@@ -12,12 +12,12 @@ $.init = function() {
 
 	MODEL.init(CONFIG.index);
 
-	$.handleData(MODEL.getImageTourml(CONFIG.id));
+	$.handleData(MODEL.getVideoTourml(CONFIG.id));
 
-	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
+	//$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
 	if(APP.Device.isHandheld) {
-		$.NavigationBar.showBack();
+		//$.NavigationBar.showBack();
 	}
 
 };
@@ -25,17 +25,17 @@ $.init = function() {
 $.handleData = function(_data) {
 	APP.log("debug", "tourml_stop.handleData");
 
-	$.handleNavigation();
+	//$.handleNavigation();
 	APP.log("debug", "tourml_stop._data | " + JSON.stringify(_data));
 
-	var subdata = null;
-	var image_file = null;
+	/*	var subdata = null;
+	var video_file = null;
 
 	if(_data) {
 		$.Title.text = _data.title;
 		$.text.value = "ceci est un video stop"; //_data.description;
 		subdata = _data.subdata;
-		image_file = _data.image;
+		video_file = _data.video;
 	} else {
 		$.Title.text = "Problem";
 		$.text.value = "Impossible to fetch content for this stop. Please contact contact@tourguide.io."
@@ -43,38 +43,33 @@ $.handleData = function(_data) {
 
 	APP.log("debug", "tourml_stop._data.subdata | " + JSON.stringify(subdata));
 
-	APP.log("debug", "tourml_stop._data.image | " + JSON.stringify(image_file));
+	APP.log("debug", "tourml_stop._data.video | " + JSON.stringify(video_file));
+*/
+	//$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
-	if(image_file) {
-		var width = APP.Device.width - 60;
-
-		var image_view = Ti.UI.createImageView({
-			image: image_file,
-			width: width + "dp",
-			height: Ti.UI.SIZE,
-			preventDefaultImage: true
-		});
-
-		$.image.add(image_view);
-	} else {
-		$.content.remove($.image)
-	}
-
-	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
-
+	/*
 	if(APP.Device.isHandheld) {
 		$.NavigationBar.showBack({
 			callback: function(_event) {
+				$.videoPlayer.stop();
+				$.videoPlayer.release();
 				APP.removeAllChildren();
 			}
 		});
 	}
-
+	*/
 	$.NavigationBar.showAction({
 		callback: function(_event) {
 			SOCIAL.share(ACTION.url, $.NavigationBar.right);
 		}
 	});
+
+	// Change to a valid URL
+	var contentURL = "/video.mp4";
+
+	//$.videoPlayer.url = contentURL;
+	//$.videoPlayer.mediaControlStyle = Titanium.Media.VIDEO_CONTROL_DEFAULT;
+
 };
 
 $.handleNavigation = function(_id) {
@@ -106,8 +101,48 @@ $.handleNavigation = function(_id) {
 		},
 	}).getView();
 
-	$.NavigationBar.addNavigation(navigation);
+	//$.NavigationBar.addNavigation(navigation);
 };
 
 // Kick off the init
-$.init();
+//$.init();
+
+//WORKING
+var vidWin = Titanium.UI.createWindow({
+	title: 'Video',
+	backgroundColor: '#fff'
+});
+
+var videoPlayer = Titanium.Media.createVideoPlayer({
+	//top: "20dp",
+	autoplay: true,
+	backgroundColor: 'black',
+	//bottom: "100dp",
+	//width: Ti.UI.FILL,
+	mediaControlStyle: Titanium.Media.VIDEO_CONTROL_DEFAULT,
+	//scalingMode: Titanium.Media.VIDEO_SCALING_ASPECT_FIT,
+	fullscreen: true
+});
+
+videoPlayer.url = '/video.mp4';
+
+videoPlayer.addEventListener('fullscreen', function(e) {
+	if(e.entering === false) {
+		// left fullscreen AKA done may have been pressed.  
+		videoPlayer.stop();
+		videoPlayer.release();
+		APP.removeAllChildren();
+		vidWin.close();
+	}
+});
+
+videoPlayer.addEventListener('android:back', function(e) {
+	// left fullscreen AKA done may have been pressed.  
+	videoPlayer.stop();
+	videoPlayer.release();
+	APP.removeAllChildren();
+	vidWin.close();
+});
+
+vidWin.add(videoPlayer);
+vidWin.open();
