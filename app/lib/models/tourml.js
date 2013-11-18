@@ -292,7 +292,7 @@ function Model() {
 
 		var db = Ti.Database.open("ChariTi");
 		//select ts.id, ts.title, ts.stop_id, ts.description, ts.view, tsp.prop_value from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id where tsp.prop_name="code" order by tsp.prop_value asc
-		var data = db.execute("select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id where tsp.prop_name=\"code\" order by tsp.prop_value asc");
+		var data = db.execute("select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id where tsp.prop_name=\"code\" order by tsp.prop_value * 1 asc");
 		var temp = [];
 
 		while(data.isValidRow()) {
@@ -312,7 +312,7 @@ function Model() {
 		db.close();
 
 		return temp;
-	}
+	};
 
 	/*
 	 * Fetch function for stops with code & geodata
@@ -323,7 +323,7 @@ function Model() {
 
 		var db = Ti.Database.open("ChariTi");
 		//select ts.id, ts.title, ts.stop_id, ts.description, ts.view, tsp.prop_value from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id where tsp.prop_name="code" order by tsp.prop_value asc
-		var request = "select ts.id, ts.title, ts.view as tourmltype, tsp.prop_value as tourmlcode, tac.data as tourmlgeo from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id  left join tourml_" + TID + "_stop_assetref as tsa on ts.stop_id=tsa.stop_id left join tourml_" + TID + "_asset_content as tac on tsa.asset_id = tac.asset_id where tsp.prop_name=\"code\" and tsa.asset_usage=\"geo\" order by tsp.prop_value asc;"
+		var request = "select ts.id, ts.title, ts.view as tourmltype, tsp.prop_value as tourmlcode, tac.data as tourmlgeo from tourml_" + TID + "_stop as ts left join tourml_" + TID + "_stop_property as tsp on ts.stop_id=tsp.stop_id  left join tourml_" + TID + "_stop_assetref as tsa on ts.stop_id=tsa.stop_id left join tourml_" + TID + "_asset_content as tac on tsa.asset_id = tac.asset_id where tsp.prop_name=\"code\" and tsa.asset_usage=\"geo\" order by tsp.prop_value asc;";
 		APP.log("debug", "TOURML.getGeoStops.request | " + request);
 		var data = db.execute(request);
 		var temp = [];
@@ -344,7 +344,7 @@ function Model() {
 		db.close();
 
 		return temp;
-	}
+	};
 
 	/*
 	 * Generic fetch function for tour stop
@@ -370,7 +370,7 @@ function Model() {
 				description: "",
 				tourmltype: subdata.fieldByName("tourmltype"),
 				code: ""
-			}
+			};
 
 			subdata.next();
 			i++;
@@ -436,7 +436,7 @@ function Model() {
 				description: "",
 				tourmltype: subdata.fieldByName("tourmltype"),
 				code: ""
-			}
+			};
 
 			subdata.next();
 			i++;
@@ -503,7 +503,7 @@ function Model() {
 				description: "",
 				tourmltype: subdata.fieldByName("tourmltype"),
 				code: ""
-			}
+			};
 
 			subdata.next();
 			i++;
@@ -574,7 +574,7 @@ function Model() {
 				description: "",
 				tourmltype: subdata.fieldByName("tourmltype"),
 				code: ""
-			}
+			};
 
 			subdata.next();
 			i++;
@@ -582,7 +582,7 @@ function Model() {
 
 		subdata.close();
 
-		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id AND tsa.asset_usage=\"video\" LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"video\/mp4\" LEFT JOIN tourml_" + TID + "_asset_source_property AS tasp ON tasp.asset_source_id=tas.id AND tasp.prop_name LIKE \"duration\" WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
+		var data_request = "select ts.id, ts.title, ts.stop_id, ts.description, ts.view as tourmltype, tsp.prop_value, tsa.asset_id, tas.uri, tasp.prop_value as duration FROM tourml_" + TID + "_stop AS ts LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id LEFT JOIN tourml_" + TID + "_stop_assetref tsa ON tsa.stop_id=ts.stop_id AND tsa.asset_usage=\"video\" LEFT JOIN tourml_" + TID + "_asset_source tas ON tsa.asset_id=tas.asset_id AND tas.format=\"video\/mp4\" LEFT JOIN tourml_" + TID + "_asset_source_property AS tasp ON tasp.asset_source_id=tas.id AND tasp.prop_name LIKE \"%duration%\" WHERE ts.id = " + UTIL.cleanEscapeString(_id) + " LIMIT 1;";
 
 		APP.log("debug", "TOURML.getVideoTourml.data_request | " + data_request);
 

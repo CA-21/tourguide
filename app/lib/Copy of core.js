@@ -535,14 +535,6 @@ var APP = {
 		APP.log("debug", "APP.addChild | _controller " + JSON.stringify(_controller));
 		APP.log("debug", "APP.addChild | _params " + JSON.stringify(_params));
 		APP.log("debug", "APP.addChild | _modal " + JSON.stringify(_modal));
-		APP.log("debug", "APP.addChild | APP.currentStack " + JSON.stringify(APP.currentStack));
-
-		APP.log("debug", "APP.addChild | APP.currentStack " + JSON.stringify(APP.currentStack));
-		APP.log("debug", "APP.addChild | APP.currentDetailStack " + JSON.stringify(APP.currentDetailStack));
-		APP.log("debug", "APP.addChild | APP.controllerStacks.length " + APP.controllerStacks.length);
-		APP.log("debug", "APP.addChild | APP.detailStacks.length " + APP.detailStacks.length);
-		APP.log("debug", "APP.addChild | APP.Device.isHandheld " + APP.Device.isHandheld);
-		APP.log("debug", "APP.addChild | APP.hasDetail" + APP.hasDetail);
 
 		var stack;
 
@@ -551,11 +543,8 @@ var APP = {
 			stack = APP.modalStack;
 		} else {
 			if(APP.Device.isHandheld || !APP.hasDetail) {
-				APP.log("debug", "APP.addChild | test | APP.Device.isHandheld || !APP.hasDetail");
-				APP.log("debug", "APP.addChild | test | APP.currentStack " + JSON.stringify(APP.currentStack));
 				stack = APP.controllerStacks[APP.currentStack];
 			} else {
-				APP.log("debug", "APP.addChild | test | APP.Device.isHandheld || !APP.hasDetail ELSE ");
 				stack = APP.detailStacks[APP.currentDetailStack];
 			}
 		}
@@ -565,64 +554,43 @@ var APP = {
 
 		// Add screen to the controller stack
 		stack.push(screen);
-		APP.log("debug", "APP.addChild | stack length " + JSON.stringify(stack.length));
 
 		// Add the screen to the window
 		if(APP.Device.isHandheld || !APP.hasDetail || _modal) {
-			APP.log("debug", "APP.addChild | test | APP.Device.isHandheld || !APP.hasDetail || _modal");
 			APP.addScreen(screen);
 		} else {
-			APP.log("debug", "APP.addChild | test | APP.Device.isHandheld || !APP.hasDetail || _modal ELSE ");
 			APP.addDetailScreen(screen);
 		}
 
-	},
-
-	testRemoveChild: function(_modal) {
-		APP.log("debug", "APP.testRemoveChild | _modal " + JSON.stringify(_modal));
-		APP.log("debug", "APP.testRemoveChild | APP.currentStack " + JSON.stringify(APP.currentStack));
-		APP.log("debug", "APP.testRemoveChild | APP.currentDetailStack " + JSON.stringify(APP.currentDetailStack));
-		APP.log("debug", "APP.testRemoveChild | APP.controllerStacks.length " + APP.controllerStacks.length);
-		APP.log("debug", "APP.testRemoveChild | APP.detailStacks.length " + APP.detailStacks.length);
-		APP.log("debug", "APP.testRemoveChild | APP.Device.isHandheld " + APP.Device.isHandheld);
-		APP.log("debug", "APP.testRemoveChild | APP.hasDetail" + APP.hasDetail);
+		APP.log("debug", "APP | stack length " + JSON.stringify(APP.currentStack.length));
 	},
 	/**
 	 * Removes a child screen
 	 * @param {Boolean} [_modal] Removes the child from the modal stack
 	 */
 	removeChild: function(_modal) {
-		APP.log("debug", "APP.testRemoveChild | _modal " + JSON.stringify(_modal));
-		APP.log("debug", "APP.testRemoveChild | APP.currentStack " + JSON.stringify(APP.currentStack));
-		APP.log("debug", "APP.testRemoveChild | APP.currentDetailStack " + JSON.stringify(APP.currentDetailStack));
-		APP.log("debug", "APP.testRemoveChild | APP.controllerStacks.length " + APP.controllerStacks.length);
-		APP.log("debug", "APP.testRemoveChild | APP.detailStacks.length " + APP.detailStacks.length);
-		APP.log("debug", "APP.testRemoveChild | APP.Device.isHandheld " + APP.Device.isHandheld);
-		APP.log("debug", "APP.testRemoveChild | APP.hasDetail" + APP.hasDetail);
+		//APP.log("debug", "APP.removeChild | _modal " + JSON.stringify(_modal));
 
 		var stack;
 
-		// Determine if stack is associated with a tab
 		if(_modal) {
 			stack = APP.modalStack;
 		} else {
-			if(APP.Device.isHandheld || !APP.hasDetail) {
-				APP.log("debug", "APP.removeChild | test | APP.Device.isHandheld || !APP.hasDetail");
-				stack = APP.controllerStacks[APP.currentStack];
-			} else {
-				APP.log("debug", "APP.removeChild | test | APP.Device.isHandheld || !APP.hasDetail ELSE ");
+			if(APP.Device.isTablet && APP.hasDetail) {
+				APP.log("debug", "APP.removeChild | APP.Device.isTablet && APP.hasDetail");
 				stack = APP.detailStacks[APP.currentDetailStack];
+			} else {
+				APP.log("debug", "APP.removeChild | APP.Device.isTablet && APP.hasDetail ELSE");
+				stack = APP.controllerStacks[APP.currentStack];
+				//APP.log("debug", "APP.removeChild | stack " + JSON.stringify(stack));
 			}
 		}
-
-		APP.log("debug", "APP.removeChild | stack length before removal " + JSON.stringify(stack.length));
 
 		var screen = stack[stack.length - 1];
 		var previousStack;
 		var previousScreen;
 
 		stack.pop();
-		APP.log("debug", "APP.removeChild | stack length after removal " + JSON.stringify(stack.length));
 
 		if(stack.length === 0) {
 			APP.log("debug", "APP.removeChild | stack.length === 0");

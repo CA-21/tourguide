@@ -14,10 +14,10 @@ $.init = function() {
 
 	$.handleData(MODEL.getVideoTourml(CONFIG.id));
 
-	//$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
+	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
 	if(APP.Device.isHandheld) {
-		//$.NavigationBar.showBack();
+		$.NavigationBar.showBack();
 	}
 
 };
@@ -25,50 +25,49 @@ $.init = function() {
 $.handleData = function(_data) {
 	APP.log("debug", "tourml_stop.handleData");
 
-	//$.handleNavigation();
+	$.handleNavigation();
 	APP.log("debug", "tourml_stop._data | " + JSON.stringify(_data));
 
-	/*	var subdata = null;
+	var subdata = null;
 	var video_file = null;
 
 	if(_data) {
-		$.Title.text = _data.title;
-		$.text.value = "ceci est un video stop"; //_data.description;
+		$.title.text = _data.title;
+		$.footer_label.text = _data.description;
 		subdata = _data.subdata;
-		video_file = _data.video;
+		video_file = "/" + _data.video;
 	} else {
-		$.Title.text = "Problem";
-		$.text.value = "Impossible to fetch content for this stop. Please contact contact@tourguide.io."
+		$.title.text = "Problem";
+		$.footer_label.text = "Impossible to fetch content for this stop. Please contact contact@tourguide.io.";
 	}
 
 	APP.log("debug", "tourml_stop._data.subdata | " + JSON.stringify(subdata));
 
 	APP.log("debug", "tourml_stop._data.video | " + JSON.stringify(video_file));
-*/
-	//$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
-	/*
+	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
+
 	if(APP.Device.isHandheld) {
 		$.NavigationBar.showBack({
 			callback: function(_event) {
-				$.videoPlayer.stop();
-				$.videoPlayer.release();
-				APP.removeAllChildren();
+				//APP.removeAllChildren();
 			}
 		});
 	}
-	*/
+
 	$.NavigationBar.showAction({
 		callback: function(_event) {
 			SOCIAL.share(ACTION.url, $.NavigationBar.right);
 		}
 	});
 
-	// Change to a valid URL
-	var contentURL = "/video.mp4";
+	$.image.addEventListener('click', function(e) {
+		$.launchVideoPlayer(video_file);
+	});
 
-	//$.videoPlayer.url = contentURL;
-	//$.videoPlayer.mediaControlStyle = Titanium.Media.VIDEO_CONTROL_DEFAULT;
+	if(video_file) {
+		$.launchVideoPlayer(video_file);
+	}
 
 };
 
@@ -101,48 +100,36 @@ $.handleNavigation = function(_id) {
 		},
 	}).getView();
 
-	//$.NavigationBar.addNavigation(navigation);
+	$.NavigationBar.addNavigation(navigation);
+};
+
+$.launchVideoPlayer = function(_video) {
+	var videoPlayer = Titanium.Media.createVideoPlayer({
+		//top: "20dp",
+		autoplay: true,
+		backgroundColor: 'black',
+		mediaControlStyle: Titanium.Media.VIDEO_CONTROL_DEFAULT,
+		fullscreen: true
+	});
+
+	videoPlayer.url = _video;
+
+	videoPlayer.addEventListener('fullscreen', function(e) {
+		if(e.entering === false) {
+			// left fullscreen AKA done may have been pressed.  
+			videoPlayer.stop();
+			videoPlayer.release();
+			//APP.removeAllChildren();
+		}
+	});
+
+	videoPlayer.addEventListener('android:back', function(e) {
+		APP.log("debug", "back pressed : win " + JSON.stringify(win));
+		videoPlayer.stop();
+		videoPlayer.release();
+		//APP.removeAllChildren();
+	});
 };
 
 // Kick off the init
-//$.init();
-
-//WORKING
-var vidWin = Titanium.UI.createWindow({
-	title: 'Video',
-	backgroundColor: '#fff'
-});
-
-var videoPlayer = Titanium.Media.createVideoPlayer({
-	//top: "20dp",
-	autoplay: true,
-	backgroundColor: 'black',
-	//bottom: "100dp",
-	//width: Ti.UI.FILL,
-	mediaControlStyle: Titanium.Media.VIDEO_CONTROL_DEFAULT,
-	//scalingMode: Titanium.Media.VIDEO_SCALING_ASPECT_FIT,
-	fullscreen: true
-});
-
-videoPlayer.url = '/video.mp4';
-
-videoPlayer.addEventListener('fullscreen', function(e) {
-	if(e.entering === false) {
-		// left fullscreen AKA done may have been pressed.  
-		videoPlayer.stop();
-		videoPlayer.release();
-		APP.removeAllChildren();
-		vidWin.close();
-	}
-});
-
-videoPlayer.addEventListener('android:back', function(e) {
-	// left fullscreen AKA done may have been pressed.  
-	videoPlayer.stop();
-	videoPlayer.release();
-	APP.removeAllChildren();
-	vidWin.close();
-});
-
-vidWin.add(videoPlayer);
-vidWin.open();
+$.init();

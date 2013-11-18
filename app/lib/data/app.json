@@ -44,20 +44,6 @@
 			"cache": 120
 		},
 		{
-			"title": "Visiter l'église",
-			"feed": "Eglise.bundle",
-			"type": "tourml",
-			"image": "news3",
-			"cache": 120
-		},
-		{
-			"title": "Casa Brasil videos",
-			"feed": "videos.bundle",
-			"type": "tourml",
-			"image": "news3",
-			"cache": 120
-		},
-		{
 			"title": "Photothèque",
 			"username": "gautiermichelin",
 			"apiKey": "d8dec4cb1124ed0fb7e104cc08bd249f",

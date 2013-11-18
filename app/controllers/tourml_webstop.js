@@ -65,7 +65,7 @@ $.handleData = function(_data) {
 	if(APP.Device.isHandheld) {
 		$.NavigationBar.showBack({
 			callback: function(_event) {
-				APP.removeAllChildren();
+				//APP.removeAllChildren();
 			}
 		});
 	}

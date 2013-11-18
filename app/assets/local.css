@@ -1,0 +1,13 @@
+p {
+	color: #880000;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+body {
+	background-color:blue;
+}
+
+body, canvas {
+	background-color:black;
+}

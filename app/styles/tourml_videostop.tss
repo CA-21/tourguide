@@ -38,7 +38,7 @@
 	},
 	color: "#777"
 },
-"#Title": {
+"#title": {
 	left: "10dp",
 	right: "10dp",
 	bottom: "10dp",
@@ -49,24 +49,52 @@
 	},
 	color: "#333"
 },
-"#videoPlayer": {
-	top: "15dp",
-	width: Ti.UI.SIZE,
-	height: "300dp",
-	backgroundColor: "black"
-},
-"#text": {
-	top: "15dp",
-	left: "15dp",
-	right: "15dp",
-	bottom: "15dp",
-	height: Ti.UI.SIZE,
-	font: {
-		fontSize: "14dp",
-		fontWeight: "normal"
+"#imageWrapper": {
+	backgroundGradient: {
+		type: "linear",
+		colors: [
+			"#222222",
+			"#000000"
+		],
+		startPoint: {
+			x: 0,
+			y: 0
+		},
+		endPoint: {
+			x: 0,
+			y: "100%"
+		},
+		backFillStart: true
 	},
-	color: "#777",
-	backgroundColor: "transparent",
-	editable: false,
-	autoLink: Ti.UI.AUTOLINK_URLS
+	height : "130dp"	
+},
+"#image": {
+},
+"#footer": {
+	width: Ti.UI.FILL,
+	height: "40dp",
+	backgroundGradient: {
+		type: "linear",
+		colors: [
+			"#E0E0E0",
+			"#FFF"
+		],
+		startPoint: {
+			x: 0,
+			y: 0
+		},
+		endPoint: {
+			x: 0,
+			y: "100%"
+		},
+		backFillStart: true
+	}
+},
+"#footer_label": {
+	color: "#000",
+	top: "10dp",
+	left: "10dp",
+	font: {
+		fontSize: "11dp"
+	}
 }

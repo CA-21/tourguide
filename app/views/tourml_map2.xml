@@ -1,7 +1,4 @@
 <Alloy>
-	<View id="Wrapper">
-		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
-		
-		<View ns="Ti.Map" id="content" />
-	</View>
+	<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+	<View id="map" ns="Alloy.Globals.Map" />
 </Alloy>

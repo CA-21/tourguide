@@ -7,7 +7,7 @@
 "#artworkWrapper": {
 	top: "44dp",
 	bottom: "28dp",
-	width: Ti.UI.SIZE
+	width: Ti.UI.FILL
 },
 "#artwork": {
 	width: Ti.UI.FILL,

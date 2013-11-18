@@ -6,8 +6,47 @@ var CONFIG = arguments[0] || {};
 var ACTION = {};
 var KEYPAD = {};
 
+var MapModule = require('ti.map');
+
+var win = Ti.UI.createWindow({
+	backgroundColor: 'white'
+});
+var mapview = MapModule.createView({
+	mapType: MapModule.NORMAL_TYPE,
+	region: {
+		latitude: -33.87365,
+		longitude: 151.20689,
+		latitudeDelta: 0.1,
+		longitudeDelta: 0.1
+	}
+});
+
+if(OS_ANDROID) mapview.mapType = MapModule.HYBRID_TYPE;
+
 $.init = function() {
 	APP.log("debug", "map.init | " + JSON.stringify(CONFIG));
+
+	var rc = MapModule.isGooglePlayServicesAvailable()
+	switch(rc) {
+		case MapModule.SUCCESS:
+			Ti.API.info('Google Play services is installed.');
+			break;
+		case MapModule.SERVICE_MISSING:
+			alert('Google Play services is missing. Please install Google Play services from the Google Play store.');
+			break;
+		case MapModule.SERVICE_VERSION_UPDATE_REQUIRED:
+			alert('Google Play services is out of date. Please update Google Play services.');
+			break;
+		case MapModule.SERVICE_DISABLED:
+			alert('Google Play services is disabled. Please enable Google Play services.');
+			break;
+		case MapModule.SERVICE_INVALID:
+			alert('Google Play services cannot be authenticated. Reinstall Google Play services.');
+			break;
+		default:
+			alert('Unknown error.');
+			break;
+	}
 
 	MODEL.init(CONFIG.index);
 
@@ -15,18 +54,25 @@ $.init = function() {
 
 	$.handleData(MODEL.getGeoStops());
 
-	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
+	//$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
-	if(CONFIG.isChild === true) {
+	/*if(CONFIG.isChild === true) {
 		$.NavigationBar.showBack();
-	}
+	}*/
+	var view = Titanium.UI.createView({
+		backgroundColor: 'red',
+		width: "100%",
+		height: "20dp"
+	});
 
+	view.setBackgroundColor(APP.Settings.colors.primary);
+	win.add(view);
+	win.add(mapview);
+	win.open();
 };
 
 $.handleData = function(_data) {
-	APP.log("debug", "tourml_audiostop.handleData | " + JSON.stringify(_data));
-
-	var points = JSON.parse("[ { \"latitude\": \"28.24560022171899\", \"longitude\": \"-80.72571516036987\", \"pinColor\": \"Ti.Map.ANNOTATION_RED\", \"title\": \"Place A\", \"subTitle\": \"This is a subtitle\" }, { \"latitude\": \"28.24704626421908\", \"longitude\": \"-80.73882579803467\", \"pinColor\": \"Ti.Map.ANNOTATION_RED\", \"title\": \"Place B\", \"subTitle\": \"\" }, { \"latitude\": \"28.228406881099808\", \"longitude\": \"-80.73399782180786\", \"pinColor\": \"Ti.Map.ANNOTATION_RED\", \"title\": \"Place C\", \"subTitle\": \"This is a subtitle\" } ]");
+	APP.log("debug", "tourml_map.handleData | " + JSON.stringify(_data));
 
 	var annotations = [];
 
@@ -40,24 +86,33 @@ $.handleData = function(_data) {
 			var vlongitude = geo_parsed[0];
 
 			if(i == 0) {
-				var latitude_region = vlatitude;
-				var longitude_region = vlongitude;
+				mapview.region = {
+					latitude: vlatitude,
+					longitude: vlongitude,
+					latitudeDelta: 0.013,
+					longitudeDelta: 0.013
+				}
 			}
-			var annotation = Ti.Map.createAnnotation({
+			var annotation = MapModule.createAnnotation({
 				latitude: vlatitude,
 				longitude: vlongitude,
-				title: _data[i].title,
-				subtitle: "",
-				pincolor: Titanium.Map.ANNOTATION_RED
+				pincolor: MapModule.ANNOTATION_RED,
+				rightView: Ti.UI.createButton({
+					title: '>'
+				}),
+				leftButton: 'SydneyHarbourBridge.jpg',
+				title: _data[i].title
 			});
 
-			annotations.push(annotation);
+			// Add this annotation after creation
+			mapview.addAnnotation(annotation);
+
 		}
 	}
 
-	$.content.setAnnotations(annotations);
+	//$.content.setAnnotations(annotations);
 
-	$.content.setRegion({
+	/*$.content.setRegion({
 		latitude: latitude_region,
 		longitude: longitude_region,
 		latitudeDelta: 0.013,
@@ -69,8 +124,7 @@ $.handleData = function(_data) {
 	// Under Android, HYBRID_TYPE does not display satellite + roads, but only roads
 	// Bug already filed at https://jira.appcelerator.org/browse/TIMOB-9673
 	if(Ti.Platform.osname == "android") $.content.mapType = Titanium.Map.SATELLITE_TYPE;
-
+*/
 }
-
 // Kick off the init
 $.init();

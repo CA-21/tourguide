@@ -56,7 +56,7 @@ $.handleData = function(_data) {
 	if(!image_file) {
 		image_file = "/images/fond-no-image.png";
 	}
-	$.artwork.image = image_file;
+	$.artworkWrapper.backgroundImage = image_file;
 
 	APP.log("debug", "tourml_stop._data.subdata | " + JSON.stringify(subdata));
 
@@ -74,7 +74,7 @@ $.handleData = function(_data) {
 			callback: function(_event) {
 				$.streamStop();
 
-				APP.removeAllChildren();
+				//APP.removeAllChildren();
 			}
 		});
 	}

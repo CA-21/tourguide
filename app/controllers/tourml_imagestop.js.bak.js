@@ -37,7 +37,7 @@ $.handleData = function(_data) {
 		$.title.text = _data.title;
 		$.footer_label.text = "tap to zoom";
 		subdata = _data.subdata;
-		image_file = "/" + _data.image;
+		image_file = _data.image;
 	} else {
 		$.title.text = "Problem";
 		$.footer_label.text = "Impossible to fetch content for this stop. Please contact contact@tourguide.io."
@@ -45,16 +45,75 @@ $.handleData = function(_data) {
 
 	APP.log("debug", "tourml_stop._data.subdata | " + JSON.stringify(subdata));
 
-	APP.log("debug", "tourml_stop.image_file | " + JSON.stringify(image_file));
+	APP.log("debug", "tourml_stop._data.image | " + JSON.stringify(image_file));
 
 	if(!image_file) {
 		image_file = "/images/fond-no-image.png";
 	}
-	//image_file = "/images/fond-no-image.png";
-	//var imageURL = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, image_file).nativePath;
+	var imageURL = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, image_file).nativePath;
 
-	$.artwork.image = image_file;
-	$.artwork.setEnableZoomControls(true);
+	var win = Ti.UI.createWindow({
+		backgroundColor: '#000000'
+	});
+	/*var wintactile = Ti.UI.createWindow({
+		backgroundColor: 'transparent'
+	});*/
+	var view = Ti.UI.createView({});
+	var imageview = Ti.UI.createImageView({
+		image: imageURL,
+		width: "100%"
+	});
+	var closebutton = Ti.UI.createImageView({
+		image: "/icons/videos5.png",
+		top: "4dp",
+		right: "4dp"
+	});
+	imageview.addEventListener('pinch', function(e) {
+		var t = Ti.UI.create2DMatrix().scale(e.scale);
+		imageview.transform = t;
+	});
+
+	var olt = Titanium.UI.create2DMatrix(),
+		curX, curY;
+	/*
+	wintactile.addEventListener('touchstart', function(e) {
+		APP.log("debug", "tourml_imagestop.imageview.touchstart " + JSON.stringify(e.x) + " " + JSON.stringify(e.y));
+		APP.log("debug", "top : " + JSON.stringify(imageview.top) + " | left : " + JSON.stringify(imageview.left));
+		APP.log("debug", "bottom : " + JSON.stringify(imageview.bottom) + " | right : " + JSON.stringify(imageview.right));
+		APP.log("debug", "height : " + JSON.stringify(imageview.bottom - imageview.top) + " | width : " + JSON.stringify(imageview.right - imageview.left));
+	});
+	wintactile.addEventListener('touchmove', function(e) {
+		//APP.log("debug", "tourml_imagestop.imageview.touchmove " + JSON.stringify(win) + " " + JSON.stringify(e.x) + " " + JSON.stringify(imageview.center));
+		var deltaX = e.x - curX,
+			deltaY = e.y - curY;
+		//olt = olt.translate(deltaX, deltaY, 0);
+		//imageview.animate({transform: olt,duration: 100});
+		APP.log("debug", "x : " + Math.floor(e.x) + " | y : " + Math.floor(e.y));
+		APP.log("debug", "top : " + JSON.stringify(imageview.top) + " | left : " + JSON.stringify(imageview.left));
+		imageview.setTop(Math.floor(e.y));
+		imageview.setLeft(Math.floor(e.x));
+	});
+*/
+	closebutton.addEventListener('click', function(e) {
+		win.close();
+	});
+
+	view.add(closebutton);
+	view.add(imageview);
+	win.add(view);
+	win.open();
+	//wintactile.open();
+
+	//$.artwork.image = imageURL;
+	imageview.addEventListener('pinch', function(e) {
+		var t = Ti.UI.create2DMatrix().scale(e.scale);
+		$.artwork.transform = t;
+	});
+
+	win.addEventListener('android:back', function(e) {
+		APP.log("debug", "back pressed : win " + JSON.stringify(win));
+		win.close();
+	});
 
 	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
@@ -71,23 +130,6 @@ $.handleData = function(_data) {
 			SOCIAL.share(ACTION.url, $.NavigationBar.right);
 		}
 	});
-
-	/*var webview = Titanium.UI.createWebView();
-	var window = Titanium.UI.createWindow();
-	webview.setHtml("<html><body>
-		<div><canvas id='mycanvas' style='width: 100%; height: 100%'></canvas></div>
-		<script src='lib/img-touch-canvas/img-touch-canvas.js'></script>
-		<script>
-			var gesturableImg = new ImgTouchCanvas({
-				canvas: document.getElementById('mycanvas'),
-				path: '" + image_file + "'
-			});
-		</script>
-		</body></html>");
-	window.add(webview);
-	window.open({
-		modal: true
-	});*/
 
 	/*
 	if(OS_ANDROID) {

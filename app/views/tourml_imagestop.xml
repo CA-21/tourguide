@@ -9,8 +9,7 @@
 			</View>
 			
 			<View id="artworkWrapper">
-				<WebView id="artwork" />
-				
+				<ImageView id="artwork" />
 			</View>
 
 			<View id="footer">

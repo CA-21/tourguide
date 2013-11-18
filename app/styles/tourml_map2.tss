@@ -1,7 +1,0 @@
-"#content": {
-	top: "47dp",
-	userLocation: true,
-	regionFit: true,
-	mapType: Ti.Map.HYBRID_TYPE,
-	backgroundColor: "#EEE"
-}
