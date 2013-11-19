@@ -20,7 +20,7 @@ $.init = function() {
 
 	$.title.text = "Keypad";
 
-	//$.handleNavigation();
+	$.handleNavigation();
 
 };
 
@@ -30,7 +30,25 @@ $.handleNavigation = function(_id) {
 	ACTION.list = null;
 	ACTION.keypad = null;
 
-	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {}).getView();
+	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
+		navlist: function(_event) {
+			APP.log("debug", "tourml @list");
+
+			APP.addChild("tourml", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		},
+		navmap: function(_event) {
+			APP.log("debug", "tourml @map");
+
+			APP.addChild("tourml_map", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		}
+
+	}).getView();
 
 	$.NavigationBar.addNavigation(navigation);
 };

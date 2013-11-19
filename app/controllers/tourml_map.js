@@ -18,7 +18,7 @@ $.init = function() {
 		$.NavigationBar.showBack();
 	}
 
-	//$.handleNavigation();
+	$.handleNavigation();
 
 };
 
@@ -28,7 +28,24 @@ $.handleNavigation = function(_id) {
 	ACTION.list = null;
 	ACTION.keypad = null;
 
-	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {}).getView();
+	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
+		navlist: function(_event) {
+			APP.log("debug", "tourml @list");
+
+			APP.addChild("tourml", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		},
+		navkeypad: function(_event) {
+			APP.log("debug", "tourml @keypad");
+
+			APP.addChild("tourml_keypad", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		},
+	}).getView();
 
 	$.NavigationBar.addNavigation(navigation);
 };

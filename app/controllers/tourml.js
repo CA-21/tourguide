@@ -137,7 +137,15 @@ $.handleNavigation = function(_id) {
 	ACTION.keypad = null;
 
 	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
-		keypad: function(_event) {
+		navmap: function(_event) {
+			APP.log("debug", "tourml @map");
+
+			APP.addChild("tourml_map", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		},
+		navkeypad: function(_event) {
 			APP.log("debug", "tourml @keypad");
 
 			//{"title":"Visiter l'église","feed":"Eglise.bundle","type":"tourml","image":"news3","cache":120,"index":2}
