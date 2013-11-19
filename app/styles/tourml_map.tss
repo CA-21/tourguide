@@ -1,0 +1,10 @@
+"#Wrapper": {
+	backgroundColor: "#FFF"
+},
+"#webview": {
+	width:Ti.UI.FILL,
+	left:"0dp",
+	top:"50dp",
+	height:Ti.UI.FILL
+}
+

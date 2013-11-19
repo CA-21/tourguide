@@ -1,0 +1,6 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+		<WebView id="webview" url="http://leafletjs.com/examples/mobile-example.html" />
+	</View>
+</Alloy>
