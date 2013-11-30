@@ -7,7 +7,7 @@ var MODEL = require("models/tourml")();
 var CONFIG = arguments[0] || {};
 var ACTION = {};
 
-var titouchgallery = require('com.gbaldera.titouchgallery');
+var metaVisible = true;
 
 $.init = function() {
 	APP.log("debug", "tourml_stop.init | " + JSON.stringify(CONFIG));
@@ -35,12 +35,12 @@ $.handleData = function(_data) {
 
 	if(_data) {
 		$.title.text = _data.title;
-		$.footer_label.text = "tap to zoom";
+		$.description.text = _data.description ? _data.description : "";
 		subdata = _data.subdata;
 		image_file = "/" + _data.image;
 	} else {
 		$.title.text = "Problem";
-		$.footer_label.text = "Impossible to fetch content for this stop. Please contact contact@tourguide.io."
+		$.description.text = "Impossible to fetch content for this stop. Please contact contact@tourguide.io."
 	}
 
 	APP.log("debug", "tourml_stop._data.subdata | " + JSON.stringify(subdata));
@@ -53,8 +53,8 @@ $.handleData = function(_data) {
 	//image_file = "/images/fond-no-image.png";
 	//var imageURL = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, image_file).nativePath;
 
-	$.artwork.image = image_file;
-	$.artwork.setEnableZoomControls(true);
+	$.image.image = image_file;
+	//$.artwork.setEnableZoomControls(true);
 
 	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
@@ -100,31 +100,6 @@ $.handleData = function(_data) {
 	*/
 };
 
-$.titouchgallery = function(image_file) {
-	var win = Ti.UI.createWindow({
-		backgroundColor: '#000'
-	});
-
-	var titouchgallery = require('com.gbaldera.titouchgallery');
-
-	var proxy = titouchgallery.createTouchGallery({
-		images: [image_file]
-	});
-	proxy.addEventListener("scroll", function(e) {
-		Ti.API.debug("Scroll event fired: " + JSON.stringify(e));
-	});
-	proxy.addEventListener("singletap", function(e) {
-		alert("Page: " + e.currentPage);
-		Ti.API.debug("SingleTap event fired: " + JSON.stringify(e));
-	});
-	proxy.addEventListener("longpress", function(e) {
-		win.close();
-	});
-
-	win.add(proxy);
-	win.open();
-};
-
 $.handleNavigation = function(_id) {
 
 	ACTION.map = null;
@@ -153,8 +128,54 @@ $.handleNavigation = function(_id) {
 	$.NavigationBar.addNavigation(navigation);
 };
 
-// Kick off the init
+// Event listeners
+$.content.addEventListener("singletap", function(_event) {
+	if(metaVisible) {
+		metaVisible = false;
+		$.meta.visible = false;
+	} else {
+		metaVisible = true;
+		$.meta.visible = true;
+	}
+});
 
+$.imageWrapper.addEventListener('pinch', function(_event) {
+	var t = Ti.UI.create2DMatrix().scale(_event.scale);
+	$.imageWrapper.transform = t;
+});
+
+var olt = Titanium.UI.create2DMatrix(),
+	curX, curY;
+
+$.imageWrapper.addEventListener('touchstart', function(e) {
+	curX = e.x;
+	curY = e.y;
+});
+$.imageWrapper.addEventListener('touchmove', function(e) {
+	Ti.API.debug('Our event tells us the center of click is ' + e.x + ', ' + e.y);
+	var deltaX = e.x - curX,
+		deltaY = e.y - curY;
+	Ti.API.debug('Delta ' + deltaX + ', ' + deltaY);
+	Ti.API.debug('Our event tells us the center of click is ' + JSON.stringify($.imageWrapper.getCenter()));
+});
+/*
+$.imageWrapper.addEventListener('touchmove', function(e) {
+	Ti.API.debug('Our event tells us the center is ' + e.x + ', ' + e.y);
+	Ti.API.debug('Our event tells us the imageWrapper rest is ' + JSON.stringify($.imageWrapper.rect));
+	var oldX = $.imageWrapper.getCenter.x;
+	var oldY = $.imageWrapper.getCenter.y;
+	var newX = e.x + $.imageWrapper.getCenter.x - $.imageWrapper.width / 2;
+	var newY = e.y + $.imageWrapper.getCenter.y - $.imageWrapper.height / 2;
+	$.imageWrapper.animate({
+		center: {
+			x: newX,
+			y: newY
+		},
+		duration: 1
+	});
+});
+*/
+// Kick off the init
 $.init();
 
 /*

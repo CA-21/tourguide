@@ -1,90 +1,50 @@
 "#Wrapper": {
-	backgroundColor: "#FFF"
+	backgroundColor: "#000"
 },
 "#content": {
 	top: "47dp"
 },
-"#artworkWrapper": {
-	top: "0",
-	bottom: "40dp",
+"#image": {
 	width: Ti.UI.FILL,
-	height: Ti.UI.FILL,
-	backgroundColor: "#000000",
-	borderRadius: "0"
+	preventDefaultImage: true
 },
-"#artwork": {
-	width: Ti.UI.FILL
-},
-"#header": {
-	top:"0dp",
-	backgroundGradient: {
-		type: "linear",
-		colors: [
-			"#F8F8F8",
-			"#ECECEC"
-		],
-		startPoint: {
-			x: 0,
-			y: 0
-		},
-		endPoint: {
-			x: 0,
-			y: "100%"
-		},
-		backFillStart: true
-	},
+"#meta": {
+	backgroundImage: "/images/transparent.png",
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
 	layout: "vertical",
-	opacity: "0.6"
-},
-"#code": {
-	top: "10dp",
-	left: "10dp",
-	right: "10dp",
-	height: "14dp",
-	font: {
-		fontSize: "12dp",
-		fontWeight: "bold"
-	},
-	color: "#777"
+	bottom: "0dp"
 },
 "#title": {
-	left: "10dp",
-	right: "10dp",
-	bottom: "10dp",
+	top: "15dp",
+	left: "15dp",
+	right: "15dp",
 	height: Ti.UI.SIZE,
 	font: {
-		fontSize: "16dp",
+		fontSize: "14dp",
 		fontWeight: "bold"
 	},
-	color: "#333"
-},
-"#footer": {
-	width: Ti.UI.FILL,
-	height: "40dp",
-	bottom: "0dp",
-	backgroundGradient: {
-		type: "linear",
-		colors: [
-			"#E0E0E0",
-			"#FFF"
-		],
-		startPoint: {
-			x: 0,
-			y: 0
-		},
-		endPoint: {
-			x: 0,
-			y: "100%"
-		},
-		backFillStart: true
+	color: "#FFF",
+	shadowColor: "#000",
+	shadowOffset: {
+		x: "0dp",
+		y: "1dp"
 	}
 },
-"#footer_label": {
-	color: "#000",
-	left: "10dp",
+"#description": {
+	top: "5dp",
+	left: "15dp",
+	right: "15dp",
+	bottom: "15dp",
+	height: Ti.UI.SIZE,
 	font: {
-		fontSize: "11dp"
+		fontSize: "12dp",
+		fontWeight: "regular"
+	},
+	color: "#FFF",
+	shadowColor: "#000",
+	shadowOffset: {
+		x: "0dp",
+		y: "1dp"
 	}
 }
