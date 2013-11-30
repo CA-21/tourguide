@@ -38,6 +38,7 @@ $.retrieveData = function(_force, _callback) {
 	MODEL.fetch({
 		url: CONFIG.feed,
 		cache: _force ? 0 : CONFIG.cache,
+		defaultLanguage: CONFIG.defaultLanguage,
 		callback: function() {
 			$.handleData(MODEL.getAllStopsWithCode());
 

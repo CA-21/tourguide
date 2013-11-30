@@ -41,6 +41,7 @@
 			"feed": "Village.bundle",
 			"type": "tourml",
 			"image": "news3",
+			"defaultLanguage": "fr",
 			"cache": 120
 		},
 		{

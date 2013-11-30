@@ -4,14 +4,12 @@ var UTIL = require("utilities");
 
 function Model() {
 	var TID;
-	var LANG;
+	var LANG = "en";
 
 	this.init = function(_id) {
 		APP.log("debug", "TOURML.init(" + _id + ")");
 
 		TID = _id;
-		// for now, language is forced on french, waiting to have a good example of what is needed for instanciation
-		LANG = "fr";
 
 		var db = Ti.Database.open("ChariTi");
 
@@ -36,6 +34,9 @@ function Model() {
 		APP.log("debug", "TOURML.fetch");
 		APP.log("trace", JSON.stringify(_params));
 
+		// If a defaultLanguage is defined, overriding default en
+		if(_params.defaultLanguage) LANG = _params.defaultLanguage;
+
 		var isStale = UTIL.isStale(_params.url, _params.cache);
 
 		if(isStale) {
@@ -54,7 +55,16 @@ function Model() {
 					failure: _params.error
 				});
 			} else {
-				file = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "tourml/" + _params.url + "/" + LANG + ".lproj/tour.xml");
+				// Test if we have a bundle in the current user locale, else defaulting to LANG
+
+				var localeBundle = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "tourml/" + _params.url + "/" + Ti.Locale.currentLanguage + ".lproj/tour.xml");
+				if(localeBundle.exists()) {
+					APP.log("debug", "User locale available & selected for the tourml bundle :" + Ti.Locale.currentLanguage);
+					file = localeBundle;
+				} else {
+					APP.log("debug", "User locale not available, default config value selected for the tourml bundle :" + LANG);
+					file = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "tourml/" + _params.url + "/" + LANG + ".lproj/tour.xml");
+				}
 				var blob = file.read();
 				this.handleData(blob.text, _params.url, _params.callback);
 			}
