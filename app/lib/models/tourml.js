@@ -344,7 +344,8 @@ function Model() {
 				title: data.fieldByName("title"),
 				tourmltype: data.fieldByName("tourmltype"),
 				code: data.fieldByName("tourmlcode"),
-				geo: data.fieldByName("tourmlgeo")
+				geo: data.fieldByName("tourmlgeo"),
+				description: data.fieldByName("description")
 			});
 
 			data.next();
@@ -659,6 +660,38 @@ function Model() {
 		data.close();
 		db.close();
 		if(temp) return temp.id;
+		return false;
+	};
+
+	/*
+	 * Fetch id from stop code
+	 */
+
+	this.getTitleFromCode = function(_code) {
+		APP.log("debug", "TOURML.getTitleFromCode | " + _code);
+
+		var db = Ti.Database.open("ChariTi");
+
+		var data_request = "select ts.title, tsp.prop_value " + "FROM tourml_" + TID + "_stop AS ts " + "LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id " + "WHERE prop_value = " + UTIL.cleanEscapeString(_code) + " LIMIT 1;";
+		APP.log("debug", "TOURML.getIdFromCode.data_request | " + data_request);
+
+		var data = db.execute(data_request);
+
+		var temp;
+
+		while(data.isValidRow()) {
+			temp = {
+				title: data.fieldByName("title")
+			};
+
+			data.next();
+		}
+
+		APP.log("debug", "TOURML.getTitleFromCode.temp | " + JSON.stringify(temp));
+
+		data.close();
+		db.close();
+		if(temp) return temp.title;
 		return false;
 	};
 };
