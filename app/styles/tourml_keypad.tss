@@ -22,7 +22,7 @@
 		},
 		backFillStart: true
 	},
-	height: Ti.UI.SIZE,
+	height: "50dp",
 	width: Ti.UI.FILL,
 	layout: "vertical"
 },
@@ -44,64 +44,66 @@
 	height:Ti.UI.FILL
 },
 "#keypadDisplay": {
-	left:"10dp",width:"300dp",borderRadius:"5dp",backgroundColor:'#fff',borderColor:'#ccc',top:"35dp",height:"60dp"
+	left:"0dp",width:"320dp",backgroundColor:'#444444',borderColor:'#ccc',top:"35dp",height:"60dp"
 },
 "#keypadDisplayText": {
 	width:"280dp",left:"10dp",height:"40dp",top:"15dp",font:{fontSize:"35dp"},textAlign:'right'
 },
 "#messageDisplay": {
-	top:"13dp",left:"10dp",width:"300dp",height:"20dp"
+	top:"95dp",left:"0dp",width:"320dp",height:"20dp", backgroundColor:'#DDDDDD'
 },
 "#messageDisplayText": {
-	font:{fontSize:"14dp"},color:"red"
+	font:{fontSize:"14dp"},color:"black",
+	left:"10dp", right:"10dp"
 },
 "#b1": {
-	left:"10dp",top:"130dp"
+	left:"10dp",top:"120dp"
 },
 "#b2": {
-	left:"85dp",top:"130dp"
+	left:"109dp",top:"120dp"
 },
 "#b3": {
-	left:"160dp",top:"130dp"
+	left:"208dp",top:"120dp"
 },
 "#b4": {
-	left:"10dp",top:"195dp"
+	left:"10dp",top:"205dp"
 },
 "#b5": {
-	left:"85dp",top:"195dp"
+	left:"109dp",top:"205dp"
 },
 "#b6": {
-	left:"160dp",top:"195dp"
+	left:"208dp",top:"205dp"
 },
 "#b7": {
-	left:"10dp",top:"260dp"
+	left:"10dp",top:"290dp"
 },
 "#b8": {
-	left:"85dp",top:"260dp"
+	left:"109dp",top:"290dp"
 },
 "#b9": {
-	left:"160dp",top:"260dp"
+	left:"208dp",top:"290dp"
 },
 "#b0": {
-	height:"60dp",left:"160dp",top:"325dp"
+	left:"109dp",top:"375dp"
 },
 "#bClear": {
-	backgroundGradient:{type:'linear',colors:['#ccc','#999']},left:"235dp",top:"260dp"
+	backgroundGradient:{type:'linear',colors:['#ffffff','#eecccc']},left:"10dp",top:"375dp"
 },
 "#bGo": {
-	backgroundGradient:{type:'linear',colors:['#000099','#111133']},left:"235dp",top:"325dp"
+	backgroundGradient:{type:'linear',colors:['#ffffff','#ddddff']},left:"208dp",top:"375dp"
 },
 ".digitbutton": {
-	borderRadius:"5dp",border:'#ccc',font:{fontWeight:'bold'},
-	width:"70dp",
-	height:"60dp",
-	backgroundGradient:{type:'linear',colors:['#eee','#ccc']}
+	border:'#ccc',font:{fontWeight:'bold'},
+	width:"94dp",
+	height:"80dp",
+	backgroundColor:"white"
 },
 ".otherbutton": {
-	borderRadius:"5dp",border:'#ccc',font:{fontWeight:'bold'},
-	width:"70dp",
-	height:"60dp"
+	border:'#ccc',font:{fontWeight:'bold'},
+	width:"94dp",
+	height:"80dp"
 },
 ".buttonlabel": {
-	color:"#555"
+	color:"#555",
+	font:{fontSize:"28dp"}
 }
