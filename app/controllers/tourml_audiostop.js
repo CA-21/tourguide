@@ -134,7 +134,7 @@ $.handleNavigation = function(_id) {
 			STREAM.release();
 			APP.log("debug", "tourml_audio @map");
 
-			APP.addChild("tourml_map2", {
+			APP.addChild("tourml_map", {
 				index: CONFIG.index,
 				isChild: true
 			});

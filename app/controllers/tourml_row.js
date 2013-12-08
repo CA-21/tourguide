@@ -20,15 +20,15 @@ $.code.text = CONFIG.code || "";
 $.row.tourmltype = CONFIG.tourmltype || "";
 
 if($.row.tourmltype == "audio_stop") {
-	$.type_icon.image = "/icons/tourml_audio-icon.png";
+	$.type_icon.image = "/images/ic_device_access_volume_on.png";
 }
 if($.row.tourmltype == "image_stop") {
-	$.type_icon.image = "/icons/tourml_photo-icon.png";
+	$.type_icon.image = "/images/ic_device_access_camera.png";
 }
 if($.row.tourmltype == "video_stop") {
-	$.type_icon.image = "/icons/tourml_video-icon.png";
+	$.type_icon.image = "/images/ic_av_play_over_video.png";
 }
 
 if($.row.tourmltype == "stop_group") {
-	$.type_icon.image = "/icons/tourml_list-icon.png";
+	$.type_icon.image = "/images/ic_social_share.png";
 }

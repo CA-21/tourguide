@@ -53,6 +53,13 @@ $.handleNavigation = function(_id) {
 	$.NavigationBar.addNavigation(navigation);
 };
 
+$.updateMessageDisplay = function() {
+	var _id = MODEL.getIdFromCode($.keypadDisplayText.text);
+	if(_id) {
+		$.messageDisplayText.text = MODEL.getTitleFromCode($.keypadDisplayText.text);;
+	};
+};
+
 $.keypadDisplayText.text = "";
 $.messageDisplayText.text = "";
 
@@ -73,46 +80,57 @@ $.bGo.addEventListener("click", function(_event) {
 $.b1.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "1";
+	$.updateMessageDisplay();
 });
 $.b2.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "2";
+	$.updateMessageDisplay();
 });
 $.b3.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "3";
+	$.updateMessageDisplay();
 });
 $.b4.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "4";
+	$.updateMessageDisplay();
 });
 $.b5.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "5";
+	$.updateMessageDisplay();
 });
 $.b6.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "6";
+	$.updateMessageDisplay();
 });
 $.b7.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "7";
+	$.updateMessageDisplay();
 });
 $.b8.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "8";
+	$.updateMessageDisplay();
 });
 $.b9.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "9";
+	$.updateMessageDisplay();
 });
 $.b0.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text += "0";
+	$.updateMessageDisplay();
 });
 $.bClear.addEventListener("click", function(_event) {
 	$.messageDisplayText.text = "";
 	$.keypadDisplayText.text = "";
+	$.updateMessageDisplay();
 });
 
 // Kick off the init
