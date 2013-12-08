@@ -20,16 +20,18 @@ $.init = function() {
 	$.NavigationBar.setBackgroundColor(APP.Settings.colors.primary || "#000");
 
 	if(CONFIG.isChild === true) {
+		// if the window is a child, show a back button in navigation
 		$.NavigationBar.showBack();
-	}
-
-	if(APP.Settings.useSlideMenu) {
-		$.NavigationBar.showMenu();
+		$.handleData(MODEL.getAllStopsWithCode());
 	} else {
-		$.NavigationBar.showSettings();
+		// if no parent window, the data are not available : initialize first & show the menu/settings
+		$.retrieveData();
+		if(APP.Settings.useSlideMenu) {
+			$.NavigationBar.showMenu();
+		} else {
+			$.NavigationBar.showSettings();
+		}
 	}
-
-	$.retrieveData();
 };
 
 $.retrieveData = function(_force, _callback) {
