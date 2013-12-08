@@ -1,10 +1,8 @@
-"#Wrapper": {
-	backgroundColor: "#FFF"
-},
-"#webview": {
-	width:Ti.UI.FILL,
+"#content": {
+	backgroundColor: "#ccccff",
+	top: "0dp",
+	bottom:"0dp",
 	left:"0dp",
-	top:"50dp",
+	width: Ti.UI.FILL,
 	height:Ti.UI.FILL
 }
-
