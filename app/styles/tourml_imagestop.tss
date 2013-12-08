@@ -13,7 +13,7 @@
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
 	layout: "vertical",
-	bottom: "0dp"
+	top: "47dp"
 },
 "#title": {
 	top: "15dp",
@@ -24,7 +24,7 @@
 		fontSize: "14dp",
 		fontWeight: "bold"
 	},
-	color: "#FFF",
+	color: "#FFFFFF",
 	shadowColor: "#000",
 	shadowOffset: {
 		x: "0dp",
@@ -32,19 +32,19 @@
 	}
 },
 "#description": {
-	top: "5dp",
+	top: "7dp",
 	left: "15dp",
 	right: "15dp",
-	bottom: "15dp",
-	height: Ti.UI.SIZE,
+	bottom:"7dp",
 	font: {
-		fontSize: "12dp",
-		fontWeight: "regular"
+		fontSize: "11dp"
 	},
-	color: "#FFF",
-	shadowColor: "#000",
-	shadowOffset: {
-		x: "0dp",
-		y: "1dp"
-	}
+	color:"#888888"	
+}
+"#imageWebview" : {
+	top: "47dp",
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL,
+	scalesPageToFit:true,
+	backgroundColor: "#000"
 }

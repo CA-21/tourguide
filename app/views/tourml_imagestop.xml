@@ -1,15 +1,10 @@
 <Alloy>
 	<View id="Wrapper">
 		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
-		
-		<View id="content">
-			<View id="imageWrapper">
-				<ImageView id="image" />
-			</View>
-			<View id="meta">
-				<Label id="title" />
-				<Label id="description" />
-			</View>
+		<WebView id="imageWebview" />
+		<View id="meta">
+			<Label id="title" />
+			<Label id="description" />
 		</View>
 	</View>
 </Alloy>
