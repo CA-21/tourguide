@@ -4,3 +4,8 @@ build
 npm-debug.log
 tmp
 .map
+ChariTi.sqlite
+app/assets/trollface.png
+*.old.png
+resources.tgz
+app/assets/gears.gif
