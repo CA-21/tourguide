@@ -46,7 +46,9 @@
 			"defaultLanguage": "fr",
 			"cache": 120,
 			"map":true,
-			"keypad":true
+			"keypad":true,
+			"qrcode":true,
+			"qrcode_prefix":"http://fontenoy.visitenumerique/com/qr/";
 		},
 		{
 			"title": "Photothèque",
