@@ -632,34 +632,46 @@ function Model() {
 	};
 
 	/*
-	 * Fetch id from stop code
+	 * Fetch id & controller from stop code
 	 */
 
-	this.getIdFromCode = function(_code) {
+	this.getIdAndControllerFromCode = function(_code) {
 		APP.log("debug", "TOURML.getIdFromCode | " + _code);
 
 		var db = Ti.Database.open("ChariTi");
 
-		var data_request = "select ts.id, tsp.prop_value " + "FROM tourml_" + TID + "_stop AS ts " + "LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id " + "WHERE prop_value = " + UTIL.cleanEscapeString(_code) + " LIMIT 1;";
+		var data_request = "select ts.id, tsp.prop_value, ts.view " + "FROM tourml_" + TID + "_stop AS ts " + "LEFT JOIN tourml_" + TID + "_stop_property AS tsp ON ts.stop_id=tsp.stop_id " + "WHERE prop_value = " + UTIL.cleanEscapeString(_code) + " LIMIT 1;";
 		APP.log("debug", "TOURML.getIdFromCode.data_request | " + data_request);
 
 		var data = db.execute(data_request);
 
-		var temp;
+		var temp = {};
 
 		while(data.isValidRow()) {
-			temp = {
-				id: data.fieldByName("id")
-			};
+			temp.id = data.fieldByName("id");
+			switch(data.fieldByName("view")) {
+				case "audio_stop":
+					temp.controller = "tourml_audiostop";
+					break;
+				case "image_stop":
+					temp.controller = "tourml_imagestop";
+					break;
+				case "video_stop":
+					temp.controller = "tourml_videostop";
+					break;
+				default:
+					temp.controller = "tourml_stop";
+					break;
+			}
 
 			data.next();
 		}
 
-		APP.log("debug", "TOURML.getIdFromCode.temp | " + JSON.stringify(temp));
+		APP.log("debug", "TOURML.getIdAndControllerFromCode.temp | " + JSON.stringify(temp));
 
 		data.close();
 		db.close();
-		if(temp) return temp.id;
+		if(temp) return temp;
 		return false;
 	};
 

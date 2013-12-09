@@ -169,7 +169,9 @@ $.handleNavigation = function(_id) {
 			APP.log("debug", "tourml @qr");
 			APP.addChild("tourml_qr", {
 				index: CONFIG.index,
-				isChild: true
+				isChild: true,
+				qrcode: CONFIG.qrcode,
+				qrcode_prefix: CONFIG.qrcode_prefix
 			});
 		};
 	} else {

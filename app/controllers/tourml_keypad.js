@@ -54,8 +54,8 @@ $.handleNavigation = function(_id) {
 };
 
 $.updateMessageDisplay = function() {
-	var _id = MODEL.getIdFromCode($.keypadDisplayText.text);
-	if(_id) {
+	var temp = MODEL.getIdAndControllerFromCode($.keypadDisplayText.text);
+	if(temp) {
 		$.messageDisplayText.text = MODEL.getTitleFromCode($.keypadDisplayText.text);;
 	};
 };
@@ -64,11 +64,11 @@ $.keypadDisplayText.text = "";
 $.messageDisplayText.text = "";
 
 $.bGo.addEventListener("click", function(_event) {
-	var _id = MODEL.getIdFromCode($.keypadDisplayText.text);
+	var temp = MODEL.getIdAndControllerFromCode($.keypadDisplayText.text);
 	APP.log("debug", "tourml_keypad.bGo @click | " + _id);
-	if(_id) {
+	if(temp.id) {
 		APP.addChild("tourml_stop", {
-			id: _id,
+			id: temp.id,
 			index: CONFIG.index
 		});
 	} else {

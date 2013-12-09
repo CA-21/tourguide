@@ -8,6 +8,8 @@ var CONFIG = arguments[0] || {};
 var ACTION = {};
 var SELECTED;
 
+var win = Titanium.UI.createWindow();
+
 $.init = function() {
 	APP.log("debug", "tourml_map.init | " + JSON.stringify(CONFIG));
 
@@ -38,9 +40,6 @@ $.init = function() {
 			alert('Unknown error.');
 			break;
 	}
-
-	//$.handleData(MODEL.getGeoStops());
-	var win = Titanium.UI.createWindow();
 
 	WrapperView = Titanium.UI.createView({
 		top: "0",
@@ -105,7 +104,7 @@ $.init = function() {
 	// scanning is canceled.
 	picker.searchBarPlaceholderText = "ici";
 	picker.setSuccessCallback(function(e) {
-		alert("success (" + e.symbology + "): " + e.barcode);
+		$.handleScanResult(e);
 	});
 	picker.setCancelCallback(function(e) {
 		closeScanner();
@@ -234,6 +233,31 @@ $.handleNavigation = function(_id) {
 	}).getView();
 
 	$.NavigationBar.addNavigation(navigation);
+};
+
+$.handleScanResult = function(e) {
+	if(e.symbology == "QR") {
+		//alert("success : " + e.barcode);
+		APP.log("debug", "tourml_qr.scanresult @scan | " + e.barcode);
+		if(e.barcode.indexOf(CONFIG.qrcode_prefix) === 0) {
+			// QRcode prefix found, removing it
+			var result = e.barcode.replace(CONFIG.qrcode_prefix, "");
+			temp = MODEL.getIdAndControllerFromCode(result);
+			if(temp.id) {
+				// id & controller found from code
+				win.close();
+				APP.removeChild();
+				APP.addChild(temp.controller, {
+					id: temp.id,
+					index: CONFIG.index
+				});
+			} else {
+				alert("This stop is not in this tour (" + e.barcode + ").");
+			};
+		} else {
+			alert("This QR does not fit the configuration. ");
+		};
+	}
 };
 
 // Handle click events on any annotations on this map.
