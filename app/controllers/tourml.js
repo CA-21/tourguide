@@ -111,7 +111,7 @@ $.container.addEventListener("click", function(_event) {
 
 	APP.log("debug", "_event.row.tourmltype " + JSON.stringify(_event.row.tourmltype));
 
-	// Define which controller is called a click
+	// Define which controller is called with the click
 	switch(_event.row.tourmltype) {
 		case "audio_stop":
 			var controller = "tourml_audiostop";
@@ -129,42 +129,57 @@ $.container.addEventListener("click", function(_event) {
 
 	APP.addChild(controller, {
 		id: _event.row.id,
-		index: CONFIG.index
+		index: CONFIG.index,
+		map: CONFIG.map,
+		keypad: CONFIG.keypad,
+		qrcode: CONFIG.qrcode,
+		qrcode_prefix: CONFIG.qrcode_prefix
 	});
 });
 
 $.handleNavigation = function(_id) {
 
-	ACTION.map = null;
 	ACTION.list = null;
-	ACTION.keypad = null;
 
-	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
-		navmap: function(_event) {
+	if(CONFIG.map) {
+		ACTION.map = function(_event) {
 			APP.log("debug", "tourml @map");
-
 			APP.addChild("tourml_map", {
 				index: CONFIG.index,
 				isChild: true
 			});
-		},
-		navqr: function(_event) {
-			APP.log("debug", "tourml @qr");
+		};
+	} else {
+		ACTION.map = null;
+	}
 
+	if(CONFIG.qrcode) {
+		ACTION.keypad = function(_event) {
+			APP.log("debug", "tourml @keypad");
+			APP.addChild("tourml_keypad", {
+				index: CONFIG.index
+			});
+		};
+	} else {
+		ACTION.keypad = null;
+	}
+
+	if(CONFIG.qrcode) {
+		ACTION.qrcode = function(_event) {
+			APP.log("debug", "tourml @qr");
 			APP.addChild("tourml_qr", {
 				index: CONFIG.index,
 				isChild: true
 			});
-		},
-		navkeypad: function(_event) {
-			APP.log("debug", "tourml @keypad");
+		};
+	} else {
+		ACTION.qrcode = null;
+	}
 
-			//{"title":"Visiter l'église","feed":"Eglise.bundle","type":"tourml","image":"news3","cache":120,"index":2}
-			APP.addChild("tourml_keypad", {
-				index: CONFIG.index
-			});
-		}
-
+	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
+		navmap: ACTION.map,
+		navqr: ACTION.qrcode,
+		navkeypad: ACTION.keypad
 	}).getView();
 
 	$.NavigationBar.addNavigation(navigation);
