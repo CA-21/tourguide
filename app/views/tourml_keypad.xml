@@ -6,14 +6,17 @@
 			<View id="header">
 				<Label id="title" />
 			</View>
-			
-			<View id="cv">
+
+			<View id="displayZone">
 				<View id="keypadDisplay">
 					<Label id="keypadDisplayText"></Label>
 				</View>
 				<View id="messageDisplay">
 					<Label id="messageDisplayText"></Label>
 				</View>
+			</View>
+			
+			<View id="cv">
 				<View id="buttons">
 					<View id="b1" class="digitbutton"><Label class="buttonlabel">1</Label></View>
 					<View id="b2" class="digitbutton"><Label class="buttonlabel">2</Label></View>

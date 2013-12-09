@@ -37,24 +37,30 @@
 	},
 	color: "#333"
 },
-"#cv": {
-	width:Ti.UI.FILL,
-	left:"0dp",
-	top:"10dp",
-	height:Ti.UI.FILL
-},
 "#keypadDisplay": {
-	left:"0dp",width:"320dp",backgroundColor:'#444444',borderColor:'#ccc',top:"35dp",height:"60dp"
+	left:"0dp",width:Ti.UI.FILL,backgroundColor:'#444444',borderColor:'#ccc',top:"35dp",height:"60dp"
 },
 "#keypadDisplayText": {
-	width:"280dp",left:"10dp",height:"40dp",top:"15dp",font:{fontSize:"35dp"},textAlign:'right'
+	left:"10dp",right:"10dp",width:Ti.UI.FILL,height:"40dp",top:"15dp",font:{fontSize:"35dp"},textAlign:'right'
 },
 "#messageDisplay": {
-	top:"95dp",left:"0dp",width:"320dp",height:"20dp", backgroundColor:'#DDDDDD'
+	top:"95dp",left:"0dp",width:Ti.UI.FILL,right:"0dp",height:"20dp", backgroundColor:'#DDDDDD'
 },
 "#messageDisplayText": {
 	font:{fontSize:"14dp"},color:"black",
 	left:"10dp", right:"10dp"
+},
+"#cv": {
+	width:Ti.UI.FILL,
+	left:"0dp",
+	top:"10dp",
+	height:Ti.UI.FILL,
+	layout:'horizontal',
+	verticalAlign:'center'
+},
+"#buttons": {
+	height:Ti.UI.FIT,
+    width:Ti.UI.FIT
 },
 "#b1": {
 	left:"10dp",top:"120dp"
