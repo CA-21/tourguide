@@ -1,0 +1,12 @@
+<Alloy>
+	<View id="Wrapper">
+		<Require type="widget" src="com.chariti.navigationBar" id="NavigationBar" />
+	</View>
+	<View id="content">
+		<View id="cv">
+			<View id="buttons">
+				<View id="close" class="button"><Label class="buttonlabel">X</Label></View>
+			</View>
+		</View>
+	</View>
+</Alloy>

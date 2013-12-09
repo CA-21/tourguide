@@ -148,6 +148,14 @@ $.handleNavigation = function(_id) {
 				isChild: true
 			});
 		},
+		navqr: function(_event) {
+			APP.log("debug", "tourml @qr");
+
+			APP.addChild("tourml_qr", {
+				index: CONFIG.index,
+				isChild: true
+			});
+		},
 		navkeypad: function(_event) {
 			APP.log("debug", "tourml @keypad");
 

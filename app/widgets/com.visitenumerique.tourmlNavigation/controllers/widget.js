@@ -17,3 +17,9 @@ if(CONFIG.navmap && typeof CONFIG.navmap == "function") {
 } else {
 	$.navmap.opacity = 0.4;
 }
+
+if(CONFIG.navqr && typeof CONFIG.navqr == "function") {
+	$.navqr.addEventListener("click", CONFIG.navqr);
+} else {
+	$.navqr.opacity = 0.4;
+}

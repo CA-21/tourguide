@@ -1,11 +1,11 @@
 "#Wrapper": {
-	width: "144dp",
+	width: "200dp",
 	height: "37dp",
-	top: "5dp",
-	backgroundImage: WPATH("/images/background.png")
+	top: "5dp"
+	//backgroundImage: WPATH("/images/background.png")
 },
 "#navlist": {
-	image: WPATH("/images/ic_collections_sort_by_size_white.png"),
+	image: WPATH("/images/list_white.png"),
 	width: "40dp",
 	height: "40dp",
 	top: "0dp",
@@ -25,6 +25,14 @@
 	width: "40dp",
 	height: "40dp",
 	top: "0dp",
-	left: "97dp",
+	left: "98dp",
+	preventDefaultImage: true
+},
+"#navqr": {
+	image: WPATH("/images/qr_code_white.png"),
+	width: "40dp",
+	height: "40dp",
+	top: "0dp",
+	left: "145dp",
 	preventDefaultImage: true
 }

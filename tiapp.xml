@@ -32,10 +32,10 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-    <manifest android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
-        <supports-screens android:anyDensity="true"
-            android:largeScreens="true" android:normalScreens="true" android:smallScreens="true"/>
- 			<!-- Allows the API to download data from Google Map servers -->
+        <manifest android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
+            <supports-screens android:anyDensity="true"
+                android:largeScreens="true" android:normalScreens="true" android:smallScreens="true"/>
+            <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
             <!-- Allows the API to cache data -->
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -56,8 +56,8 @@
                 <meta-data
                     android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDpXGBQ3xUzHIbrIYqLJ6Nza-FeqkbBvgs"/>
             </application>
-    </manifest>
-	</android>
+        </manifest>
+    </android>
     <mobileweb>
         <precache/>
         <splash>
@@ -69,10 +69,9 @@
     <modules>
         <module platform="commonjs">ti.cloud</module>
         <module platform="iphone">dk.napp.social</module>
-        <module platform="iphone">ti.imagefactory</module>
-        <module platform="android">com.gbaldera.titouchgallery</module>
-        <module platform="android">ti.imagefactory</module>
         <module platform="android">ti.map</module>
+        <module version="1.3.1M1" platform="android">com.mirasense.scanditsdk</module>
+        <module version="1.3.1M1" platform="iphone">com.mirasense.scanditsdk</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

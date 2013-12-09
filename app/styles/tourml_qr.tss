@@ -1,0 +1,8 @@
+"#content": {
+	backgroundColor: "#ccccff",
+	top: "0dp",
+	bottom:"0dp",
+	left:"0dp",
+	width: Ti.UI.FILL,
+	height:Ti.UI.FILL
+}

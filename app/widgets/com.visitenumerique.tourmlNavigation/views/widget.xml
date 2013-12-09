@@ -3,5 +3,6 @@
 		<ImageView id="navlist" />
 		<ImageView id="navkeypad" />
 		<ImageView id="navmap" />
+		<ImageView id="navqr" />
 	</View>
 </Alloy>
