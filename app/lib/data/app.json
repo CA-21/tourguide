@@ -48,7 +48,7 @@
 			"map":true,
 			"keypad":true,
 			"qrcode":true,
-			"qrcode_prefix":"http://fontenoy.visitenumerique/com/qr/";
+			"qrcode_prefix":"http://fontenoy.visitenumerique/com/qr/"
 		},
 		{
 			"title": "Photothèque",
