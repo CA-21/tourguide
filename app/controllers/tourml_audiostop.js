@@ -124,31 +124,64 @@ $.createAudioPlayer = function(_url) {
 
 $.handleNavigation = function(_id) {
 
-	ACTION.map = null;
-	ACTION.list = null;
-	ACTION.keypad = null;
+	ACTION.list = function(_event) {
+		APP.log("debug", "tourml @list");
+		STREAM.stop();
+		STREAM.release();
+		APP.addChild("tourml", {
+			index: CONFIG.index,
+			isChild: true
+		});
+	};
 
-	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
-		navmap: function(_event) {
+	if(CONFIG.map) {
+		ACTION.map = function(_event) {
+			APP.log("debug", "tourml @map");
 			STREAM.stop();
 			STREAM.release();
-			APP.log("debug", "tourml_audio @map");
-
 			APP.addChild("tourml_map", {
 				index: CONFIG.index,
 				isChild: true
 			});
-		},
-		navkeypad: function(_event) {
+		};
+	} else {
+		ACTION.map = null;
+	}
+
+	if(CONFIG.keypad) {
+		ACTION.keypad = function(_event) {
+			APP.log("debug", "tourml @keypad");
 			STREAM.stop();
 			STREAM.release();
-			APP.log("debug", "tourml_audio @keypad");
-
 			APP.addChild("tourml_keypad", {
-				index: CONFIG.index,
-				isChild: true
+				index: CONFIG.index
 			});
-		},
+		};
+	} else {
+		ACTION.keypad = null;
+	}
+
+	if(CONFIG.qrcode) {
+		ACTION.qrcode = function(_event) {
+			APP.log("debug", "tourml @qr");
+			STREAM.stop();
+			STREAM.release();
+			APP.addChild("tourml_qr", {
+				index: CONFIG.index,
+				isChild: true,
+				qrcode: CONFIG.qrcode,
+				qrcode_prefix: CONFIG.qrcode_prefix
+			});
+		};
+	} else {
+		ACTION.qrcode = null;
+	}
+
+	var navigation = Alloy.createWidget("com.visitenumerique.tourmlNavigation", null, {
+		navlist: ACTION.list,
+		navmap: ACTION.map,
+		navqr: ACTION.qrcode,
+		navkeypad: ACTION.keypad
 	}).getView();
 
 	$.NavigationBar.addNavigation(navigation);
